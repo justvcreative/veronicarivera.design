@@ -1,0 +1,193 @@
+---
+/**
+ * NavBar: logo, name and role, the page links and the ThemeToggle.
+ * Below 720px the links collapse behind a 44px menu button; the open menu ends with the
+ * theme as a segmented control (the same radio group as the desktop ThemeToggle).
+ */
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { NAV, SITE } from '../data/site';
+
+interface Props { current?: 'Work' | 'About' | 'Contact' }
+const { current } = Astro.props;
+const options = [
+  { value: 'light', label: 'Light', icon: 'sun' },
+  { value: 'dark', label: 'Dark', icon: 'moon' },
+  { value: 'auto', label: 'Auto', icon: 'circle-half' },
+] as const;
+---
+<header class="nav" data-nav>
+  <div class="nav__bar">
+    <a class="nav__brand" href="/">
+      <Logo size={48} class="nav__logo" />
+      <span class="nav__id">
+        <span class="nav__name">{SITE.name}</span>
+        <span class="nav__role">{SITE.role[0]}<span class="nav__sep" aria-hidden="true">•</span><span class="vr-sr">, </span><span class="nav__role2">{SITE.role[1]}</span></span>
+      </span>
+    </a>
+
+    <button class="nav__toggle vr-iconbtn" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+      <span class="nav__toggle-open"><Icon name="bars-3" /></span>
+      <span class="nav__toggle-close"><Icon name="x-mark" /></span>
+      <span class="vr-sr" data-menu-label>Open menu</span>
+    </button>
+
+    <div class="nav__menu" id="site-menu" data-menu>
+      <nav aria-label="Main">
+        <ul class="nav__links">
+          {NAV.map((l) => (
+            <li><a class="nav__link" href={l.href} aria-current={current === l.label ? 'page' : undefined}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Desktop: ThemeToggle disclosure -->
+      <div class="theme" data-theme-toggle>
+        <button class="theme__trigger" type="button" aria-expanded="false" aria-controls="theme-panel" aria-label="Theme: Auto" data-theme-trigger>
+          {options.map((o) => <span class="theme__icon" data-icon={o.value}><Icon name={o.icon} /></span>)}
+        </button>
+        <fieldset class="theme__panel" id="theme-panel" hidden data-theme-panel>
+          <legend class="vr-sr">Theme</legend>
+          {options.map((o) => (
+            <label class="theme__option">
+              <input type="radio" name="theme-desktop" value={o.value} class="vr-sr" data-theme-radio />
+              <Icon name={o.icon} />
+              <span class="theme__label">{o.label}</span>
+              <Icon name="check" class="theme__check" />
+            </label>
+          ))}
+        </fieldset>
+      </div>
+
+      <!-- Phones: segmented control at the bottom of the open menu -->
+      <div class="seg-group">
+        <fieldset class="seg">
+          <legend class="vr-eyebrow seg__legend">Theme</legend>
+          <div class="seg__box">
+            {options.map((o) => (
+              <label class="seg__option">
+                <input type="radio" name="theme-mobile" value={o.value} class="vr-sr" data-theme-radio />
+                <Icon name={o.icon} />
+                <span>{o.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--background);
+    border-bottom: var(--border-width) solid var(--border);
+    transition: background-color 300ms ease-in-out;
+  }
+  .nav__bar {
+    display: flex; align-items: center; gap: var(--space-5);
+    padding: var(--space-4) var(--space-6);
+  }
+  .nav__brand {
+    display: inline-flex; align-items: center; gap: var(--space-3);
+    margin-right: auto; text-decoration: none; border-radius: var(--radius-sm); color: var(--nav-name);
+  }
+  .nav__id { display: flex; flex-direction: column; }
+  .nav__name { font-size: 1.5rem; font-weight: 500; line-height: 1.2; color: var(--nav-name); }
+  .nav__role {
+    font-family: var(--font-mono); font-size: 12px; line-height: 1.33; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent-text);
+  }
+  .nav__menu { display: flex; align-items: center; gap: var(--space-2); }
+  .nav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-2); }
+  .nav__link {
+    display: inline-flex; align-items: center; min-height: var(--target-min); padding: 0 var(--space-3);
+    border-radius: var(--radius-sm); font-size: 1.2rem; font-weight: 500; line-height: 1.5;
+    color: var(--link); text-decoration: none; transition: color 300ms ease-in-out;
+  }
+  .nav__link:hover, .nav__link:focus-visible { color: var(--link-hover); }
+  .nav__link[aria-current='page'] {
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.35em;
+    text-decoration-color: var(--accent-text);
+  }
+  .nav__toggle { display: none; }
+  .nav__toggle-close { display: none; }
+  .nav[data-open] .nav__toggle-open { display: none; }
+  .nav[data-open] .nav__toggle-close { display: block; }
+
+  /* ThemeToggle (desktop) */
+  .theme { position: relative; }
+  .theme__trigger {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: var(--target-min); height: var(--target-min); padding: 0;
+    border: 0; border-radius: var(--radius-md); background: transparent; color: var(--link); cursor: pointer;
+    transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+  }
+  .theme__trigger:hover, .theme__trigger:focus-visible { color: var(--link-hover); }
+  .theme__trigger[aria-expanded='true'] { background: var(--surface); color: var(--link); }
+  .theme__icon { display: none; }
+  :global([data-theme-pref='light']) .theme__icon[data-icon='light'],
+  :global([data-theme-pref='dark']) .theme__icon[data-icon='dark'],
+  :global([data-theme-pref='auto']) .theme__icon[data-icon='auto'],
+  :global(html:not([data-theme-pref])) .theme__icon[data-icon='auto'] { display: block; }
+  .theme__panel {
+    position: absolute; top: calc(100% + var(--space-2)); right: 0; width: 176px; margin: 0;
+    padding: var(--space-1) 0; border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-md);
+    background: var(--background); box-shadow: var(--shadow-md); min-inline-size: 0;
+  }
+  .theme__panel:not([hidden]) { animation: theme-in 200ms ease-out; }
+  @keyframes theme-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .theme__option {
+    display: flex; align-items: center; gap: var(--space-3); min-height: var(--target-min);
+    padding: 0 var(--space-3); color: var(--text); cursor: pointer;
+  }
+  .theme__option:hover { background: var(--surface); }
+  .theme__option:has(:focus-visible) { box-shadow: inset 0 0 0 2px var(--focus); }
+  .theme__option :global(.vr-icon) { color: var(--link); }
+  .theme__label { flex: 1; }
+  .theme__option :global(.theme__check) { visibility: hidden; color: var(--accent-text); }
+  .theme__option:has(:checked) .theme__label { color: var(--heading); font-weight: 500; }
+  .theme__option:has(:checked) :global(.theme__check) { visibility: visible; }
+
+  /* Segmented control (phones only) */
+  .seg-group { display: none; }
+  .seg { margin: 0; padding: 0; border: 0; min-inline-size: 0; }
+  .seg__legend { padding: 0; margin-bottom: var(--space-2); font-size: 14px; }
+  .seg__box {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 2px;
+    border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-md); background: var(--background);
+  }
+  .seg__option {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--target-min);
+    border-radius: var(--radius-sm); color: var(--text); cursor: pointer;
+  }
+  .seg__option :global(.vr-icon) { color: var(--link); }
+  .seg__option:has(:checked) { background: var(--surface); color: var(--heading); font-weight: 500; }
+  .seg__option:has(:focus-visible) { box-shadow: var(--focus-ring); }
+
+  @media (max-width: 1023.98px) {
+    .nav__bar { padding-inline: var(--grid-margin-tablet); }
+    .nav__sep { display: none; }
+    .nav__role2 { display: block; }
+  }
+
+  @media (max-width: 719.98px) {
+    .nav__bar { flex-wrap: wrap; padding: var(--space-4); gap: 0; }
+    .nav__name { font-size: 20px; }
+    .nav__brand :global(.nav__logo) { width: 52px; height: 52px; }
+    .nav__sep { display: none; }
+    .nav__role2 { display: block; }
+    .nav__toggle { display: inline-flex; }
+    .theme { display: none; }
+    .nav__menu { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-top: var(--space-5); }
+    .nav[data-open] .nav__menu { display: flex; }
+    .nav[data-open] { max-height: 100dvh; overflow-y: auto; }
+    .nav__links { flex-direction: column; gap: 0; }
+    .nav__link { width: 100%; }
+    .seg-group {
+      display: block; margin-top: var(--space-3); padding-top: var(--space-4);
+      border-top: var(--border-width) solid var(--border); padding-bottom: var(--space-2);
+    }
+  }
+</style>

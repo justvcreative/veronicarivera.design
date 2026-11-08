@@ -1,0 +1,139 @@
+@import "@fontsource/maven-pro/400.css";
+@import "@fontsource/maven-pro/500.css";
+@import "@fontsource/maven-pro/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "./tokens.css";
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h, 81px) + 24px); }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  /* On screens taller than the page (e.g. a 12.9" iPad in portrait), the navy footer fills the rest. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+body > footer { flex: 1 0 auto; }
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+h1, h2, h3, h4, h5, h6 { margin: 0; color: var(--heading); text-wrap: balance; }
+p { margin: 0; }
+p, li, dd, figcaption { text-wrap: pretty; }
+button { font: inherit; }
+:where(a) { color: inherit; }
+
+.vr-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: var(--space-4); top: var(--space-2); z-index: 100;
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-md);
+  background: var(--button-bg); color: var(--button-text); font-weight: 500; text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; outline: 2px solid transparent; box-shadow: var(--focus-ring); }
+
+/* Page width: 144px margins in a 1440 frame (content-max 1152), 32px on tablet, 16px on phones. */
+.container {
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-margin));
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+:root { --page-margin: var(--grid-margin-phone); }
+@media (min-width: 768px) { :root { --page-margin: var(--grid-margin-tablet); } }
+@media (min-width: 1200px) { :root { --page-margin: 144px; } }
+
+/* ---------- Type ---------- */
+.vr-eyebrow {
+  margin: 0; font-family: var(--font-mono); font-size: 1rem; line-height: 1.5; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text);
+}
+.vr-label {
+  font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em;
+}
+.vr-h2-page { font-size: 2.62rem; line-height: 1.2; font-weight: 500; }
+.vr-lead { font-size: 1.2rem; line-height: 1.67; }
+@media (max-width: 767.98px) {
+  .vr-eyebrow { font-size: 14px; }
+  .vr-h2-page { font-size: 28.8px; }
+  .vr-lead { font-size: 17.6px; line-height: 1.6; }
+}
+
+/* ---------- Focus ---------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* ---------- Button ---------- */
+.vr-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: var(--target-min); padding: var(--space-3) var(--space-5);
+  border: var(--border-width) solid transparent; border-radius: var(--radius-md);
+  font: inherit; font-weight: 500; font-size: 1rem; line-height: 1.5; text-decoration: none; cursor: pointer;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
+}
+.vr-btn .vr-icon { width: 20px; height: 20px; }
+.vr-btn--sm { padding: var(--space-3) var(--space-4); font-size: 0.9rem; line-height: 1.25rem; }
+.vr-btn--primary { background: var(--button-bg); color: var(--button-text); }
+.vr-btn--primary:hover, .vr-btn--primary:focus-visible { background: var(--button-bg-hover); color: var(--button-text); }
+.vr-btn--secondary { background: transparent; color: var(--link); border-color: var(--link); }
+.vr-btn--secondary:hover, .vr-btn--secondary:focus-visible { color: var(--link-hover); border-color: var(--link-hover); }
+.vr-btn--text { background: transparent; color: var(--link); padding-left: var(--space-2); padding-right: var(--space-2); }
+.vr-btn--text:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 0.2em; }
+.vr-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.vr-btn--primary:disabled:hover { background: var(--button-bg); }
+
+/* ---------- Icon button ---------- */
+.vr-iconbtn {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: var(--target-min); height: var(--target-min); padding: 0;
+  border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-md);
+  background: var(--background); color: var(--link); cursor: pointer;
+  transition: color 300ms ease-in-out, border-color 300ms ease-in-out;
+}
+.vr-iconbtn:hover { color: var(--link-hover); border-color: var(--link-hover); }
+.vr-iconbtn--round { border-radius: var(--radius-full); border-color: var(--link); }
+
+/* ---------- Link ---------- */
+.vr-link {
+  color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+  border-radius: var(--radius-sm); transition: color 300ms ease-in-out;
+}
+.vr-link:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+.vr-icon.vr-link__ext { display: inline-block; width: 0.85em; height: 0.85em; margin-left: 0.2em; vertical-align: -0.05em; }
+
+/* ---------- Tag ---------- */
+.vr-tag {
+  display: inline-block; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text);
+  font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em;
+}
+
+/* ---------- Icon ---------- */
+.vr-icon { display: block; width: 24px; height: 24px; flex-shrink: 0; }
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

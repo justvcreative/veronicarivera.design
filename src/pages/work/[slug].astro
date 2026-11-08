@@ -1,0 +1,49 @@
+---
+/** The one case study template. Content lives in src/content/case-studies/*.mdx. */
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/cs/Hero.astro';
+import CaseNav from '../../components/cs/CaseNav.astro';
+import NextBand from '../../components/cs/NextBand.astro';
+import Viewer from '../../components/cs/Viewer.astro';
+import Section from '../../components/cs/Section.astro';
+import ProjectDetails from '../../components/cs/ProjectDetails.astro';
+import Stats from '../../components/cs/Stats.astro';
+import Outcomes from '../../components/cs/Outcomes.astro';
+import Callout from '../../components/cs/Callout.astro';
+import Caption from '../../components/cs/Caption.astro';
+import Figure from '../../components/cs/Figure.astro';
+import Cards from '../../components/cs/Cards.astro';
+import Steps from '../../components/cs/Steps.astro';
+import Step from '../../components/cs/Step.astro';
+import Slideshow from '../../components/cs/Slideshow.astro';
+import Flow from '../../components/cs/Flow.astro';
+import Feedback from '../../components/cs/Feedback.astro';
+import Link from '../../components/Link.astro';
+import '../../styles/casestudy.css';
+
+export async function getStaticPaths() {
+  const all = await getCollection('caseStudies');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }));
+}
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const next = all.find((e) => e.id === entry.data.next)!;
+const d = entry.data;
+---
+<Base title={d.title} current="Work" description={d.description}>
+  <article class="cs">
+    <Hero slug={entry.id} {...d.hero} />
+    <div class="cs-body">
+      <CaseNav sections={d.sections} />
+      <div class="cs-content">
+        <Content components={{ Section, ProjectDetails, Stats, Outcomes, Callout, Caption, Figure, Cards, Steps, Step, Slideshow, Flow, Feedback, Link }} />
+      </div>
+    </div>
+    <NextBand href={`/work/${next.id}/`} teaser={next.data.teaser} />
+  </article>
+  <Viewer />
+  <script>
+    import '../../scripts/casestudy';
+  </script>
+</Base>

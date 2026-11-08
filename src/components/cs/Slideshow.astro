@@ -1,0 +1,59 @@
+---
+/**
+ * Slideshow: one slide at a time with previous/next, dots, a counter and Pause.
+ * It advances every 7 seconds unless the visitor prefers reduced motion, hovers or focuses it,
+ * and Expand opens the same slides in the viewer dialog.
+ */
+import Picture from '../Picture.astro';
+import Icon from '../Icon.astro';
+import manifest from '../../data/images.json';
+type Slide = { img: string; alt: string; title: string; caption: string };
+interface Props { slides: Slide[]; label: string; device?: 'ipad' | 'card' }
+const { slides, label, device = 'card' } = Astro.props;
+const M = manifest as Record<string, { w: number; h: number; w2: number }>;
+---
+<section class:list={['cs-slides', `cs-slides--${device}`]} aria-roledescription="carousel" aria-label={label} data-slideshow>
+  <div class="cs-slides__stage">
+    <div class="cs-slides__viewport">
+      {slides.map((s, i) => (
+        <div class="cs-slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}: ${s.title}`} hidden={i !== 0} data-slide
+          data-viewer-label={`Slide ${i + 1} of ${slides.length}`} data-viewer-title={s.title} data-viewer-text={s.caption}
+          data-viewer-img={s.img} data-viewer-w={M[s.img].w} data-viewer-h={M[s.img].h} data-viewer-w2={M[s.img].w2} data-viewer-alt={s.alt}>
+          {device === 'ipad' ? (
+            <div class="cs-ipad">
+              <Picture name="solar-ipad-frame" alt="" class="cs-ipad__frame" sizes="(min-width: 768px) 560px, 80vw" eager={i === 0} />
+              <div class="cs-ipad__screen"><Picture name={s.img} alt={s.alt} sizes="(min-width: 768px) 481px, 70vw" /></div>
+            </div>
+          ) : (
+            <div class="cs-slide__card"><Picture name={s.img} alt={s.alt} sizes="(min-width: 768px) 560px, 80vw" /></div>
+          )}
+        </div>
+      ))}
+    </div>
+    <button type="button" class="cs-round cs-slides__prev" aria-label="Previous slide" data-slide-prev><Icon name="chevron-left" /></button>
+    <button type="button" class="cs-round cs-slides__next" aria-label="Next slide" data-slide-next><Icon name="chevron-right" /></button>
+    <button type="button" class="cs-round cs-expand-btn" aria-label="Expand slideshow" data-slide-expand><Icon name="arrows-pointing-out" size={18} /></button>
+  </div>
+  <div class="cs-slides__controls">
+    <div class="cs-slides__dots">
+      {slides.map((s, i) => (
+        <button type="button" class="cs-dot" aria-label={`Show slide ${i + 1}: ${s.title}`} aria-current={i === 0 ? 'true' : undefined} data-slide-dot={i}></button>
+      ))}
+    </div>
+    <div class="cs-slides__right">
+      <p class="cs-slides__count" aria-hidden="true"><span data-slide-count>1</span> / {slides.length}</p>
+      <button type="button" class="cs-pause" data-slide-pause aria-pressed="false">
+        <span data-pause-icon><Icon name="pause" size={16} /></span><span data-play-icon hidden><Icon name="play" size={16} /></span>
+        <span data-pause-label>Pause</span>
+      </button>
+    </div>
+  </div>
+  <div class="cs-slides__caption" aria-live="polite">
+    {slides.map((s, i) => (
+      <div hidden={i !== 0} data-slide-caption>
+        <p class="cs-slides__title">{s.title}</p>
+        <p class="cs-slides__text">{s.caption}</p>
+      </div>
+    ))}
+  </div>
+</section>

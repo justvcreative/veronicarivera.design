@@ -1,0 +1,37 @@
+---
+/** CaseStudyCard: cover, eyebrow, title, summary and tags; the whole card links through its title. */
+import Tag from './Tag.astro';
+import Picture from './Picture.astro';
+interface Props {
+  title: string; href: string; eyebrow?: string; summary?: string; image: string; alt: string;
+  tags?: string[]; headingLevel?: 2 | 3; eager?: boolean;
+}
+const { title, href, eyebrow, summary, image, alt, tags = [], headingLevel = 2, eager = false } = Astro.props;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+<article class="card">
+  <div class="card__media"><Picture name={image} alt={alt} sizes="(min-width: 1200px) 564px, (min-width: 768px) calc(100vw - 64px), calc(100vw - 32px)" eager={eager} /></div>
+  <div class="card__body">
+    {eyebrow && <p class="vr-eyebrow">{eyebrow}</p>}
+    <H class="card__title"><a class="card__link" href={href}>{title}</a></H>
+    {summary && <p class="card__summary">{summary}</p>}
+    {tags.length > 0 && <ul class="card__tags" aria-label="Skills">{tags.map((t) => <li><Tag>{t}</Tag></li>)}</ul>}
+  </div>
+</article>
+
+<style>
+  .card { position: relative; display: flex; flex-direction: column; background: var(--background); border: var(--border-width) solid var(--border); transition: box-shadow 300ms ease-in-out; }
+  .card:hover { box-shadow: var(--shadow-sm); }
+  .card__media { background: var(--surface); }
+  .card__media :global(img) { width: 100%; height: auto; }
+  .card__body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+  .card__title { font-size: 1.5rem; font-weight: 500; line-height: 1.2; }
+  .card__link { color: var(--heading); text-decoration: none; border-radius: var(--radius-sm); transition: color 300ms ease-in-out; }
+  .card__link::after { content: ''; position: absolute; inset: 0; }
+  .card:hover .card__link { color: var(--link-hover); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+  .card__link:focus-visible { box-shadow: none; }
+  .card:has(.card__link:focus-visible) { box-shadow: var(--focus-ring); }
+  .card__summary { max-width: var(--measure); line-height: 1.5; }
+  .card__tags { list-style: none; margin: 0; padding: var(--space-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  @media (max-width: 767.98px) { .card__title { font-size: 20px; } .card__body { padding: var(--space-4); } }
+</style>

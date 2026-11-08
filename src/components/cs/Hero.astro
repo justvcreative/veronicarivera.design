@@ -1,0 +1,34 @@
+---
+/**
+ * Case study hero: a navy-tinted photo or color panel with the back link, eyebrow, title and intro,
+ * then the key visual overlapping its bottom edge (260px on desktop, about 55% of its height on phones).
+ */
+import Picture from '../Picture.astro';
+import Icon from '../Icon.astro';
+import manifest from '../../data/images.json';
+interface Props {
+  slug: string; eyebrow: string; title: string; lead: string; image: string; imageAlt: string;
+  photo?: string; photoCredit?: string; photoCreditUrl?: string; visual: 'composite' | 'framed';
+}
+const { slug, eyebrow, title, lead, image, imageAlt, photo, photoCredit, photoCreditUrl, visual } = Astro.props;
+const m = (manifest as Record<string, { w: number; h: number }>)[image];
+---
+<header class:list={['cs-hero', `cs-hero--${slug}`]} style={`--ratio: ${(m.h / m.w).toFixed(4)}`}>
+  <div class="cs-hero__top">
+  <div class="cs-hero__bg" aria-hidden="true">
+    {photo && <Picture name={photo} alt="" class="cs-hero__photo" sizes="100vw" eager />}
+  </div>
+  <div class="cs-hero__text">
+    <a class="cs-hero__back" href="/work/"><Icon name="arrow-left" size={18} />All work</a>
+    <p class="cs-hero__eyebrow">{eyebrow}</p>
+    <h1 class="cs-hero__title">{title}</h1>
+    <p class="cs-hero__lead">{lead}</p>
+    {photoCredit && (
+      <p class="cs-hero__credit">Photo: {photoCreditUrl ? <a href={photoCreditUrl} target="_blank" rel="noopener noreferrer">{photoCredit}<span class="vr-sr"> (opens in a new tab)</span></a> : photoCredit}</p>
+    )}
+  </div>
+  </div>
+  <div class:list={['cs-hero__visual', `cs-hero__visual--${visual}`]}>
+    <Picture name={image} alt={imageAlt} sizes={`(min-width: 1200px) ${m.w}px, 100vw`} eager />
+  </div>
+</header>

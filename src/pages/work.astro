@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { getCollection } from 'astro:content';
+
+// Order: Vida Solar, JCPS, Atria. Each card goes into the shorter column (masonry).
+const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Work" current="Work" description="Case studies by Veronica Rivera: product design, brand identity and design systems.">
+  <h1 class="vr-sr">Work</h1>
+  <section class="work" aria-label="Case studies">
+    <div class="masonry" data-masonry>
+      {studies.map((s, i) => (
+        <div class="masonry__item" data-masonry-item>
+          <CaseStudyCard
+            title={s.data.card.title}
+            href={`/work/${s.id}/`}
+            eyebrow={s.data.card.eyebrow}
+            summary={s.data.card.summary}
+            image={s.data.card.image}
+            alt={s.data.card.alt}
+            tags={s.data.card.tags}
+            eager={i === 0}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+  <CallToAction secondaryLabel="Read my story" secondaryHref="/about/" />
+</Base>
+
+<style>
+  .work { max-width: calc(var(--content-max) + 2 * var(--page-margin)); margin: 0 auto; padding: var(--space-9) var(--page-margin); }
+  .masonry { display: flex; flex-direction: column; gap: var(--space-6); }
+  @media (min-width: 1200px) {
+    /* Two columns; without JS, CSS columns keep the reading order top-to-bottom per column. */
+    .masonry { display: block; columns: 2; column-gap: var(--grid-gutter); }
+    .masonry__item { break-inside: avoid; margin-bottom: var(--space-6); }
+    .masonry[data-ready] { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--grid-gutter); align-items: start; columns: auto; }
+    .masonry[data-ready] .masonry__item { margin: 0; }
+    .masonry[data-ready] > :global(.masonry__col) { display: flex; flex-direction: column; gap: var(--space-6); }
+  }
+  @media (max-width: 767.98px) { .work { padding: 40px var(--page-margin) var(--space-8); } }
+</style>
+
+<script>
+  import { refreshParallax } from '../scripts/site';
+  // Masonry: place each card, in order, into the shorter of two columns (desktop only).
+  const grid = document.querySelector<HTMLElement>('[data-masonry]');
+  if (grid) {
+    const items = Array.from(grid.querySelectorAll<HTMLElement>('[data-masonry-item]'));
+    const mq = window.matchMedia('(min-width: 1200px)');
+    const layout = () => {
+      grid.querySelectorAll('.masonry__col').forEach((c) => c.remove());
+      grid.removeAttribute('data-ready');
+      items.forEach((i) => grid.appendChild(i));
+      if (!mq.matches) return;
+      const cols = [document.createElement('div'), document.createElement('div')];
+      cols.forEach((c) => { c.className = 'masonry__col'; grid.appendChild(c); });
+      grid.setAttribute('data-ready', '');
+      const heights = [0, 0];
+      items.forEach((item) => {
+        const target = heights[0] <= heights[1] ? 0 : 1;
+        cols[target].appendChild(item);
+        heights[target] += item.getBoundingClientRect().height;
+      });
+      // Parallax: the shorter (left) column lags behind the right one as you scroll, so the two drift apart.
+      cols[0].dataset.parallax = '0.18';
+      cols[0].dataset.parallaxMax = '160';
+      cols[0].dataset.parallaxMode = 'scroll';
+      cols[0].dataset.parallaxMin = '1200';
+    };
+    layout();
+    refreshParallax();
+    mq.addEventListener('change', () => { layout(); refreshParallax(); });
+  }
+</script>

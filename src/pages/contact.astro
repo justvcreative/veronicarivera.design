@@ -1,0 +1,207 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+const topics = ['A full-time role', 'Freelance or contract work', 'Design system help', 'Speaking or mentoring', 'Just saying hi'];
+---
+<Base title="Contact" current="Contact" description="Get in touch with Veronica Rivera about a role, a project, a design system or just to say hi.">
+  <div class="contact">
+    <div class="contact__main">
+      <div class="contact__card">
+        <p class="vr-eyebrow">Let's talk</p>
+        <h1 class="vr-h2-page contact__title">Let's build something meaningful together.</h1>
+        <p class="contact__body">Whether it's tokenizing a design system, untangling a complex workflow, or bringing color and clarity to a new product—I'm always up for the challenge.</p>
+        <p class="contact__email">Prefer email? Write to me at <a class="vr-link" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+
+        <div class="contact__alert" tabindex="-1" data-form-alert hidden></div>
+
+        <form class="form" action={SITE.formEndpoint || undefined} method="POST" novalidate data-contact-form>
+          <p class="form__note">All fields are required.</p>
+
+          <div class="vr-field">
+            <label class="vr-field__label" for="name">First and Last Name</label>
+            <input class="vr-input" id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required aria-describedby="name-error" />
+            <p class="vr-field__error" id="name-error" hidden><Icon name="exclamation-circle" size={20} /><span>Enter your first and last name.</span></p>
+          </div>
+
+          <div class="vr-field">
+            <label class="vr-field__label" for="email">Email</label>
+            <p class="vr-field__hint" id="email-hint">So I can write back.</p>
+            <input class="vr-input" id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required aria-describedby="email-hint email-error" />
+            <p class="vr-field__error" id="email-error" hidden><Icon name="exclamation-circle" size={20} /><span>Enter an email address like name@example.com.</span></p>
+          </div>
+
+          <div class="vr-field">
+            <label class="vr-field__label" for="topic">What's it about?</label>
+            <div class="vr-select">
+              <select class="vr-input vr-select__control" id="topic" name="topic" required aria-describedby="topic-error">
+                <option value="" disabled selected>Choose one</option>
+                {topics.map((t) => <option value={t}>{t}</option>)}
+              </select>
+              <Icon name="chevron-down" size={20} class="vr-select__icon" />
+            </div>
+            <p class="vr-field__error" id="topic-error" hidden><Icon name="exclamation-circle" size={20} /><span>Choose what your message is about.</span></p>
+          </div>
+
+          <div class="vr-field">
+            <label class="vr-field__label" for="message">Message</label>
+            <p class="vr-field__hint" id="message-hint">A few lines about your project, timeline and how I can help.</p>
+            <textarea class="vr-input vr-input--area" id="message" name="message" rows="6" required aria-describedby="message-hint message-error"></textarea>
+            <p class="vr-field__error" id="message-error" hidden><Icon name="exclamation-circle" size={20} /><span>Write a few lines so I know how to help.</span></p>
+          </div>
+
+          <!-- Formspree honeypot: hidden from people and screen readers; bots fill it in and Formspree drops the message. -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="New message from veronicarivera.design" />
+
+          <div class="form__submit">
+            <Button type="submit" data-submit>Send message</Button>
+            <p class="form__reply">I usually reply within 2 business days.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="contact__art" aria-hidden="true">
+      {Array.from({ length: 8 }, (_, i) => <span class:list={['strip', i % 2 ? 'strip--down' : 'strip--up']}></span>)}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .contact { display: grid; grid-template-columns: 1fr 512px; }
+  .contact__main { padding: var(--space-9) var(--space-5) var(--space-9) var(--page-margin); }
+  .contact__card { max-width: 760px; display: flex; flex-direction: column; gap: var(--space-5); }
+  .contact__body { max-width: 564px; font-size: 18px; line-height: 1.67; }
+  .contact__email { font-size: 18px; line-height: 1.67; }
+  .contact__email .vr-link { font-weight: 500; }
+  .contact__alert:focus { outline: none; }
+  .form { display: flex; flex-direction: column; gap: var(--space-5); max-width: 564px; margin-top: var(--space-5); }
+  .form__note { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); }
+  .form__submit { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+  .form__reply { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); }
+  .contact__art { display: grid; grid-template-columns: repeat(8, 1fr); }
+  .strip--up { background: linear-gradient(180deg, #fbf7ef 0%, #dfe5e8 35%, #f772a8 75%, #ffcf8a 100%); }
+  .strip--down { background: linear-gradient(180deg, #ffcf8a 0%, #f772a8 25%, #dfe5e8 65%, #fbf7ef 100%); }
+  :global([data-theme='dark']) .strip--up { background: linear-gradient(180deg, #13181b 0%, #003a6c 30%, #f772a8 70%, #ffcf8a 100%); }
+  :global([data-theme='dark']) .strip--down { background: linear-gradient(180deg, #ffcf8a 0%, #f772a8 30%, #003a6c 70%, #13181b 100%); }
+
+  /* Form fields (design system TextField, TextArea, Select, Checkbox, FormAlert) */
+  :global(.vr-field) { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; border: 0; min-width: 0; }
+  :global(.vr-field__label) { font-size: 1rem; font-weight: 500; line-height: 1.5; color: var(--text); }
+  :global(.vr-field__hint) { margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); margin-top: calc(-1 * var(--space-1)); }
+  :global(.vr-input) {
+    width: 100%; min-height: 48px; padding: var(--space-3) var(--space-4);
+    border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-md); background: var(--background); color: var(--text);
+    font: inherit; font-size: 1rem; line-height: 1.5; transition: border-color 300ms ease-in-out;
+  }
+  :global(.vr-input::placeholder) { color: var(--text-muted); opacity: 1; }
+  :global(.vr-input:hover) { border-color: var(--text); }
+  :global(.vr-input:focus-visible) { outline: 2px solid transparent; border-color: var(--focus); box-shadow: var(--focus-ring); }
+  :global(.vr-input--area) { min-height: 144px; resize: vertical; }
+  :global(.vr-input[aria-invalid='true']) { border-color: var(--error); box-shadow: inset 0 0 0 1px var(--error); }
+  :global(.vr-field__error) { display: flex; align-items: flex-start; gap: var(--space-2); margin: 0; font-size: 0.9rem; line-height: 1.5; font-weight: 500; color: var(--error); }
+  :global(.vr-field__error[hidden]) { display: none; }
+  :global(.vr-field__error .vr-icon) { margin-top: 1px; }
+  :global(.vr-select) { position: relative; }
+  :global(.vr-select__control) { appearance: none; -webkit-appearance: none; padding-right: calc(var(--space-4) * 2 + 20px); cursor: pointer; }
+  :global(.vr-select__icon.vr-icon) { position: absolute; right: var(--space-4); top: 50%; margin-top: -10px; pointer-events: none; color: var(--text); }
+  :global(.vr-check) { display: flex; align-items: flex-start; gap: var(--space-3); }
+  :global(.vr-check__input) { flex-shrink: 0; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--button-bg); cursor: pointer; }
+  :global(.vr-check__text) { display: flex; flex-direction: column; gap: var(--space-1); }
+  :global(.vr-check__text .vr-field__hint) { margin-top: 0; }
+  :global(.vr-check__label) { cursor: pointer; }
+  :global(.vr-alert) { display: flex; gap: var(--space-3); align-items: flex-start; max-width: 564px; padding: var(--space-4) var(--space-5); border: var(--border-width) solid currentColor; border-radius: var(--radius-md); background: var(--background); }
+  :global(.vr-alert--success) { color: var(--success); }
+  :global(.vr-alert--error) { color: var(--error); }
+  :global(.vr-alert__title) { font-weight: 500; }
+  :global(.vr-alert__text) { color: var(--text); }
+  :global(.vr-alert__text a) { color: var(--link); }
+
+  @media (max-width: 1199.98px) { .contact { grid-template-columns: 1fr 30%; } }
+  @media (max-width: 767.98px) {
+    .contact { display: flex; flex-direction: column-reverse; }
+    .contact__art { height: 176px; display: block; will-change: transform; background: linear-gradient(90deg, #ffcf8a 0%, #f772a8 45%, #dfe5e8 100%); }
+    :global([data-theme='dark']) .contact__art { background: linear-gradient(90deg, #ffcf8a 0%, #f772a8 45%, #003a6c 100%); }
+    .contact__art .strip { display: none; }
+    .contact__main { padding: 0 var(--page-margin) var(--space-7); margin-top: -64px; }
+    .contact__card { position: relative; z-index: 1; padding: var(--space-6) 20px; background: var(--background); border: var(--border-width) solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(19, 24, 27, 0.1); }
+    :global([data-theme='dark']) .contact__card { box-shadow: var(--shadow-md); }
+    .contact__body, .contact__email { font-size: 16px; line-height: 1.6; }
+    .form :global(.vr-btn) { width: 100%; }
+  }
+</style>
+
+<script>
+  import { SITE } from '../data/site';
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const alertBox = document.querySelector<HTMLElement>('[data-form-alert]');
+  const icon = (d: string) => `<svg class="vr-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="${d}"/></svg>`;
+  const OK = 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z';
+  const ERR = 'M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z';
+
+  function showAlert(tone: 'success' | 'error', title: string, html: string) {
+    if (!alertBox) return;
+    alertBox.hidden = false;
+    alertBox.innerHTML = `<div class="vr-alert vr-alert--${tone}" role="${tone === 'error' ? 'alert' : 'status'}">${icon(tone === 'error' ? ERR : OK)}<div><p class="vr-alert__title">${title}</p><div class="vr-alert__text"><p>${html}</p></div></div></div>`;
+    alertBox.focus();
+  }
+
+  function validate(field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+    const error = document.getElementById(`${field.id}-error`);
+    let ok = field.value.trim() !== '';
+    if (ok && field.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+    if (field.id === 'name' && ok) ok = field.value.trim().length > 1;
+    if (ok) field.removeAttribute('aria-invalid');
+    else field.setAttribute('aria-invalid', 'true');
+    if (error) error.hidden = ok;
+    return ok;
+  }
+
+  // Phones: the gradient band drifts down behind the form card, slower than the page.
+  const band = document.querySelector<HTMLElement>('.contact__art');
+  const phone = window.matchMedia('(max-width: 767.98px)');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let raf = 0;
+  const drift = () => {
+    raf = 0;
+    if (!band) return;
+    if (!phone.matches || still.matches) { band.style.transform = ''; return; }
+    const y = Math.min(80, Math.max(0, window.scrollY * 0.35));
+    band.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
+  };
+  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(drift); }, { passive: true });
+  phone.addEventListener('change', drift);
+  still.addEventListener('change', drift);
+  drift();
+
+  if (form) {
+    const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[required]'));
+    fields.forEach((f) => f.addEventListener('blur', () => { if (f.getAttribute('aria-invalid')) validate(f); }));
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const results = fields.map(validate);
+      const firstBad = fields[results.indexOf(false)];
+      if (firstBad) { firstBad.focus(); return; }
+      if (!SITE.formEndpoint) {
+        showAlert('error', "The form isn't connected yet", `Please email me at <a href="mailto:${SITE.email}">${SITE.email}</a> for now.`);
+        return;
+      }
+      const button = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+      if (alertBox) alertBox.hidden = true;
+      form.setAttribute('aria-busy', 'true');
+      button.disabled = true; button.textContent = 'Sending…';
+      try {
+        const res = await fetch(SITE.formEndpoint, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        showAlert('success', 'Thanks, your message is on its way', "I'll reply within 2 business days.");
+      } catch {
+        showAlert('error', "Your message didn't send", `Please try again, or email me at <a href="mailto:${SITE.email}">${SITE.email}</a>.`);
+      } finally {
+        form.removeAttribute('aria-busy');
+        button.disabled = false; button.textContent = 'Send message';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,40 @@
+---
+/**
+ * Case study navigation. Desktop: a sticky side nav ("On this page"). Phones and tablets: a section
+ * bar that sticks under the header and opens the section menu, plus Back to top after two screens.
+ */
+import Icon from '../Icon.astro';
+interface Props { sections: { id: string; title: string }[] }
+const { sections } = Astro.props;
+const num = (i: number) => String(i + 1).padStart(2, '0');
+---
+<nav class="cs-side" aria-label="On this page" data-cs-side>
+  <p class="cs-side__label" aria-hidden="true">On this page</p>
+  <ul>
+    {sections.map((s, i) => (
+      <li><a href={`#${s.id}`} class="cs-side__link" data-cs-link={s.id} aria-current={i === 0 ? 'true' : undefined}>{s.title}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<div class="cs-bar" data-cs-bar>
+  <button type="button" class="cs-bar__toggle" aria-expanded="false" aria-controls="cs-menu" data-cs-bar-toggle>
+    <span class="vr-sr">On this page, current section: </span>
+    <span class="cs-bar__num" data-cs-bar-num>01</span>
+    <span class="cs-bar__name" data-cs-bar-name>{sections[0]?.title}</span>
+    <Icon name="chevron-down" class="cs-bar__chev" />
+  </button>
+  <div class="cs-menu" id="cs-menu" hidden data-cs-menu>
+    <div class="cs-menu__head">
+      <p class="cs-menu__label" id="cs-menu-label">On this page</p>
+      <button type="button" class="vr-iconbtn cs-menu__close" aria-label="Close section menu" data-cs-menu-close><Icon name="x-mark" /></button>
+    </div>
+    <ul aria-labelledby="cs-menu-label">
+      {sections.map((s, i) => (
+        <li><a href={`#${s.id}`} class="cs-menu__link" data-cs-link={s.id} aria-current={i === 0 ? 'true' : undefined}><span class="cs-menu__num">{num(i)}</span>{s.title}</a></li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<a href="#main" class="cs-top vr-iconbtn" aria-label="Back to top" data-cs-top hidden><Icon name="arrow-up" /></a>

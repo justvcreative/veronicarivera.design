@@ -1,0 +1,10 @@
+---
+/** Flow: numbered areas joined by arrows. */
+interface Props { items: string[]; label: string }
+const { items, label } = Astro.props;
+---
+<ol class="cs-flow" aria-label={label}>
+  {items.map((t, i) => (
+    <li class="cs-flow__item"><span class="cs-flow__num">Area {i + 1}</span><span class="cs-flow__name">{t}</span></li>
+  ))}
+</ol>

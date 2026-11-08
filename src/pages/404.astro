@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+<Base title="Page not found" description="This page doesn't exist. Head back to the work or the home page.">
+  <section class="nf">
+    <p class="vr-eyebrow">404</p>
+    <h1 class="nf__title">This page took a different path.</h1>
+    <p class="nf__text">The link may be old or mistyped. The work is a good place to start.</p>
+    <div class="nf__buttons">
+      <Button href="/work/">See my work</Button>
+      <Button href="/" variant="secondary">Go home</Button>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { max-width: calc(var(--content-max) + 2 * var(--page-margin)); margin: 0 auto; padding: var(--space-9) var(--page-margin); min-height: 60vh; display: flex; flex-direction: column; gap: var(--space-5); justify-content: center; }
+  .nf__title { font-size: 3rem; line-height: 1.2; font-weight: 400; max-width: 20ch; }
+  .nf__text { font-size: 1.2rem; line-height: 1.67; max-width: 40ch; }
+  .nf__buttons { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  @media (max-width: 767.98px) { .nf__title { font-size: 34px; } .nf__text { font-size: 17.6px; } }
+</style>

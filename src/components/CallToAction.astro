@@ -1,0 +1,47 @@
+---
+/**
+ * Call to action: a sunrise radial gradient under a surface layer blurred 80px,
+ * with a centered background card on shadow-md. The secondary button defaults to
+ * "View my work" → /work; the Work page passes "Read my story" → /about.
+ */
+import Button from './Button.astro';
+interface Props { secondaryLabel?: string; secondaryHref?: string }
+const { secondaryLabel = 'View my work', secondaryHref = '/work/' } = Astro.props;
+---
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta__blur" aria-hidden="true"></div>
+  <div class="cta__card">
+    <p class="vr-eyebrow">Let's talk</p>
+    <h2 class="vr-h2-page" id="cta-title">Let's build something meaningful together.</h2>
+    <p class="cta__body">Whether it's tokenizing a design system, untangling a complex workflow, or bringing color and clarity to a new product—I'm always up for the challenge.</p>
+    <div class="cta__buttons">
+      <Button href="/contact/">Get in touch</Button>
+      <Button href={secondaryHref} variant="secondary">{secondaryLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    --cta-g: radial-gradient(150% 150% at 100% 100%, #ffcf8a 0%, #f772a8 28%, #dfe5e8 52%, #fbf7ef 85%);
+    position: relative; overflow: hidden; isolation: isolate;
+    padding: var(--space-9) var(--page-margin);
+    background: var(--cta-g);
+  }
+  :global([data-theme='dark']) .cta { --cta-g: radial-gradient(150% 150% at 100% 100%, #ffcf8a 0%, #f772a8 28%, #003a6c 52%, #13181b 85%); }
+  .cta__blur { position: absolute; inset: 0; background: var(--surface); filter: blur(80px); z-index: -1; }
+  .cta__card {
+    max-width: var(--content-max); margin: 0 auto; padding: var(--space-7);
+    background: var(--background); box-shadow: var(--shadow-md);
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-5); text-align: center;
+  }
+  .cta__card h2 { max-width: 760px; }
+  .cta__body { max-width: 600px; font-size: 18px; line-height: 1.67; }
+  .cta__buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+  @media (max-width: 767.98px) {
+    .cta { padding: var(--space-8) var(--space-4); }
+    .cta__card { padding: var(--space-5); }
+    .cta__body { font-size: 16px; line-height: 1.6; }
+    .cta__buttons { flex-direction: column; align-self: stretch; }
+  }
+</style>

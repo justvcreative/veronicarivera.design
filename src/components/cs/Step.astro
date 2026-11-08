@@ -1,0 +1,29 @@
+---
+/**
+ * A process step: image (opens the step viewer), "Step n", title, text and bullets.
+ * Steps alternate sides on desktop and stack image-first on phones.
+ * The viewer reads data-viewer-* attributes; the first paragraph of the slot is its caption.
+ */
+import Picture from '../Picture.astro';
+import Icon from '../Icon.astro';
+import manifest from '../../data/images.json';
+interface Props { n: number; total: number; title: string; img: string; alt: string; summary: string; contain?: boolean }
+const { n, total, title, img, alt, summary, contain = false } = Astro.props;
+const m = (manifest as Record<string, { w: number; h: number; w2: number }>)[img];
+---
+<li class:list={['cs-step', n % 2 === 0 && 'cs-step--flip']}>
+  <div class:list={['cs-step__media', contain && 'cs-step__media--contain']}>
+    <button type="button" class="cs-step__open" data-viewer-open="steps"
+      data-viewer-label={`Step ${n} of ${total}`} data-viewer-title={title} data-viewer-text={summary}
+      data-viewer-img={img} data-viewer-w={m.w} data-viewer-h={m.h} data-viewer-w2={m.w2} data-viewer-alt={alt}>
+      <Picture name={img} alt={alt} sizes="(min-width: 768px) 320px, calc(100vw - 32px)" />
+      <span class="cs-expand" aria-hidden="true"><Icon name="arrows-pointing-out" size={18} /></span>
+      <span class="vr-sr">Expand image: {title}</span>
+    </button>
+  </div>
+  <div class="cs-step__text">
+    <p class="cs-step__num">Step {n}</p>
+    <h3 class="cs-step__title">{title}</h3>
+    <slot />
+  </div>
+</li>

@@ -1,0 +1,25 @@
+---
+/**
+ * Picture: a WebP exported from Penpot at 1x and 2x (public/images/<name>.webp and <name>@2x.webp).
+ * Width and height come from the manifest written by scripts/images.mjs, so nothing shifts on load.
+ */
+import manifest from '../data/images.json';
+interface Props { name: string; alt: string; sizes?: string; eager?: boolean; class?: string }
+const { name, alt, sizes, eager = false, class: className } = Astro.props;
+const m = (manifest as Record<string, { w: number; h: number; w2: number }>)[name];
+if (!m) throw new Error(`Image "${name}" is missing from src/data/images.json`);
+const src = `/images/${name}.webp`;
+const src2 = `/images/${name}@2x.webp`;
+---
+<img
+  class={className}
+  src={src}
+  srcset={`${src} ${m.w}w, ${src2} ${m.w2}w`}
+  sizes={sizes ?? `(min-width: ${m.w}px) ${m.w}px, 100vw`}
+  width={m.w}
+  height={m.h}
+  alt={alt}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+  {...(eager ? { fetchpriority: 'high' } : {})}
+/>

@@ -1,0 +1,177 @@
+---
+title: "Vida Solar: A Guided App for Solar Technicians"
+description: "How Veronica Rivera took an internal solar commissioning app from discovery to MVP in 8 weeks, replacing spreadsheets with one guided flow."
+order: 1
+next: atria-senior-living
+teaser: "Vida Solar: turning spreadsheet-heavy field work into a guided app"
+card:
+  title: "Vida Solar"
+  eyebrow: "Case study · Product design"
+  summary: "Took an internal commissioning app from discovery to MVP in 8 weeks, replacing spreadsheets with one guided flow for field technicians."
+  image: work-vida-solar
+  alt: "The VidaSolar commissioning app's Upload JSON screen on an iPad, against a sunrise gradient."
+  tags: ["Product design", "UX research"]
+hero:
+  eyebrow: "Case study · Product design · NDA client"
+  title: "Turning spreadsheet-heavy field work into a guided app for solar technicians"
+  lead: "As the sole designer, I took an internal commissioning app from discovery to MVP in 8 weeks. It replaced Excel files and raw database uploads with one step-by-step flow."
+  image: solar-hero
+  imageAlt: "The VidaSolar commissioning app on an iPad, open to the Plant Configuration upload screen: drag a JSON file in, or enter the plant manually."
+  photo: solar-hero-photo
+  photoCredit: "Derek Sutton / Unsplash"
+  photoCreditUrl: "https://unsplash.com/photos/green-and-white-stripe-textile-SxDPsKCGk40"
+  visual: composite
+sections:
+  - { id: overview, title: "Overview" }
+  - { id: challenge, title: "The challenge" }
+  - { id: solution, title: "The solution" }
+  - { id: process, title: "Process" }
+  - { id: impact, title: "Impact" }
+  - { id: learned, title: "What I learned" }
+---
+
+<Section id="overview" n="01" title="Overview">
+
+Commissioning is the step that connects a new solar plant's trackers to the systems that monitor and control them. Technicians did it by juggling Excel files and raw database uploads. I designed an internal app that walks them through setup one step at a time, so trackers get connected with fewer errors and less guesswork.
+
+<ProjectDetails items={[
+  { label: "Role", value: "Lead Designer" },
+  { label: "Timeline", value: "8 weeks · MVP delivered Dec 2023" },
+  { label: "Team", value: "Sole designer, with a global engineering team and a project manager" },
+  { label: "Skills", value: "UI design · Stakeholder management · Agile cross-functional collaboration" },
+]} />
+
+<Caption>Client: a leading solar energy manufacturer under NDA. I show the work under VidaSolar, a stand-in brand I created to protect the client.</Caption>
+
+<Stats items={[
+  { value: "8 weeks", label: "from discovery to a working MVP" },
+  { value: "5 steps", label: "one guided flow in place of multiple spreadsheets" },
+  { value: "2 ways in", label: "import a JSON file or enter a plant manually" },
+]} />
+
+</Section>
+
+<Section id="challenge" n="02" title="The challenge">
+
+Commissioning a solar plant meant translating dense engineering data by hand. Technicians worked across multiple Excel spreadsheets, then uploaded the results straight into a database. Every handoff was a chance for a typo, and every error cost time in the field.
+
+The data itself was hard to read. Technicians had to interpret plant architecture, tracker configurations and site conditions without a tool built for how they work. The people doing the most critical setup step had the least support.
+
+<Callout label="The question I set out to answer">
+How might we give technicians one clear path through commissioning, so accuracy comes from the tool rather than from memory and double-checking?
+</Callout>
+
+<Figure img="solar-raw-data" alt="Sample data: a trackers_export.csv spreadsheet listing zones, tracker names, MAC addresses and coordinates, with one malformed MAC address highlighted, beside a plant_config.json file in a code editor.">
+Before: technicians worked through files like these by hand, with hundreds of trackers across zones and a chance for a typo at every step. Sample data, for illustration.
+</Figure>
+
+</Section>
+
+<Section id="solution" n="03" title="The solution">
+
+The commissioning app gives technicians one guided flow for connecting a plant's trackers to the client's databases and systems. Once connected, the plant can be monitored and controlled remotely, across sites in markets around the world.
+
+<Slideshow label="App screens" device="ipad" slides={[
+  { img: "solar-slide-1", title: "Starting point", caption: "Technicians begin a plant configuration from a JSON file that was already generated, or enter everything manually.", alt: "The Plant Configuration start screen: a dashed drop zone to click or drag a JSON file, and an Enter Manually button." },
+  { img: "solar-slide-2", title: "Step 1 · General", caption: "Plant details come first, in plain labels with units spelled out. Required fields are marked, and a “See Example” link helps with technical inputs like azimuth and chord length.", alt: "The General step: plant information fields such as customer, site name, capacity in megawatts and language, plant layout fields for azimuth, chord length and pitch, and customer notification settings." },
+  { img: "solar-slide-3", title: "Step 2 · DS Boards", caption: "Each distribution switch board is listed by name and subfield, with add, edit and delete controls above the list.", alt: "The DS Boards step: a table of distribution switch boards with name and subfield columns, and Add DS Board, Edit and Delete buttons." },
+  { img: "solar-slide-4", title: "Step 3 · Serial Line", caption: "Dense network data that used to live in spreadsheets becomes one sortable table, with add, edit and delete in a single place.", alt: "The Serial Line step: a sortable table of serial lines with remote IP, port, switch and device type." },
+  { img: "solar-slide-5", title: "Step 4 · Devices", caption: "Devices are grouped by type, such as general devices and sensors. Details stay tucked behind “Show Properties” so the screen stays scannable in the field.", alt: "The Devices step: device cards grouped into general devices and sensors, each with a Show Properties dropdown and Edit and Delete buttons." },
+  { img: "solar-slide-6", title: "Step 5 · Zones", caption: "The final step groups sensors into zones, such as wind, snow and temperature. The progress timeline shows every earlier step as complete.", alt: "The Zones step: Wind, Temp and Snow zone cards, with every earlier step checked off in the progress bar." },
+]} />
+
+### Key features
+
+<Cards kind="feature" items={[
+  { title: "Guided setup", text: "Five steps (General, DS Boards, Serial Line, Devices, Zones) replace the spreadsheets, with a progress bar that always shows where the technician is." },
+  { title: "Fewer manual handoffs", text: "Adding trackers to the plant database is automated, cutting the copy-and-upload steps where errors crept in." },
+  { title: "Remote monitoring and control", text: "Technicians can check and adjust tracker performance without being on site, reducing downtime." },
+  { title: "Built for the field", text: "Clear language and a simple layout shorten the learning curve for new technicians." },
+]} />
+
+### Inside the app
+
+The MVP has three areas. Plant Configuration is the heart of it. Discovery unlocks only after a plant is configured and its trackers are uploaded; it is where the plant finds each tracker and brings it online.
+
+<Flow label="The app's three areas, in order" items={["Plant Configuration", "Tracker Upload", "Discovery"]} />
+
+</Section>
+
+<Section id="process" n="04" title="Process">
+
+I started with the technicians, not the screens. Before designing anything, I asked how they commissioned a plant today and collected their real spreadsheets, files and manuals.
+
+<Steps>
+<Step n={1} total={4} title="Discovery" img="solar-step-1" summary="I ran weekly sessions with client stakeholders to map the full commissioning process." alt="A diagram of commissioning as it was: engineering data translated by hand into Excel spreadsheets, uploaded raw into the database, and errors found in the field sending work back for rework.">
+
+I ran weekly sessions with client stakeholders to map the full commissioning process.
+
+- Gathered technical requirements, field terminology and how technicians prefer to see data
+- Learned how the back end connects to the interface, so the design respected real system constraints
+- Mapped it all in Miro, so stakeholders could review on their own time
+
+</Step>
+<Step n={2} total={4} title="Wireframes and prototypes" img="solar-step-2" summary="I turned those requirements into wireframes, then an interactive Figma prototype. A key requirement: design for the large, company-issued iPads technicians use in the field." alt="The app's upload screen on an iPad in perspective, against a sunrise gradient.">
+
+I turned those requirements into wireframes, then an interactive Figma prototype. A key requirement: design for the large, company-issued iPads technicians use in the field.
+
+- A large iPad has room for a desktop-style layout, so technicians keep the side navigation and full data tables in view
+- But they work by touch, not with a mouse, so I sized buttons, table rows and controls for fingers and planned for touch gestures
+- Reviewed with stakeholders at each stage, rather than saving feedback for the end
+
+</Step>
+<Step n={3} total={4} title="Feedback and iteration" img="solar-step-3" summary="I kept gathering input from stakeholders and technicians through design and development." alt="The File Upload component spec: its anatomy, five states from default to error, the loading animation in CSS and specs for engineers.">
+
+I kept gathering input from stakeholders and technicians through design and development.
+
+- Each round sharpened usability and kept the tool aligned with field needs
+- A design system let us spin up testable MVP screens quickly
+- Documented every component's anatomy, states and specs, so the client and engineers could explore the system themselves and build exactly what was intended
+
+</Step>
+<Step n={4} total={4} title="Handoff and build support" img="solar-step-4" summary="I handed the designs to developers and stayed on through implementation." alt="Plant Configuration screens in Figma, with annotations, empty states and error states.">
+
+I handed the designs to developers and stayed on through implementation.
+
+- Answered design questions as they came up
+- Checked the build against stakeholder and user expectations
+
+</Step>
+</Steps>
+
+<Callout>
+Speed was my biggest strength on this project. I got prototypes running quickly and reworked them as soon as new information surfaced, so stakeholders were always reacting to something real.
+</Callout>
+
+</Section>
+
+<Section id="impact" n="05" title="Impact">
+
+The app replaced a spreadsheet-and-upload process with one guided tool, so technicians spend their time commissioning rather than reconciling files. It also gave the client remote visibility into tracker performance across its global sites.
+
+### What the MVP delivered
+
+<Outcomes items={[
+  { value: "One guided flow", label: "in place of multiple spreadsheets and manual database uploads" },
+  { value: "Two ways in", label: "to start a plant configuration: load a JSON file that was already generated, or enter it from scratch" },
+  { value: "A design-system foundation", label: "that made it possible to turn out testable MVP screens quickly within the 8 weeks" },
+]} />
+
+<Caption>This was an 8-week engagement to get an MVP into the team’s hands, so I rolled off before post-launch metrics existed.</Caption>
+
+<Feedback label="What the client and engineers said">
+The client team called the design very professional, and credited me with facilitating the work and bridging the gap between engineering and stakeholders. Engineers and the client also praised the component system as transparent and fully documented: they could explore it themselves, and it guided them through what to build.
+</Feedback>
+
+</Section>
+
+<Section id="learned" n="06" title="What I learned">
+
+<Cards kind="learning" items={[
+  { title: "Empathy starts with the artifacts people already use.", text: "Asking technicians for their real files and manuals showed me where the process broke, faster than any interview script." },
+  { title: "You don't need to be an engineer to design for engineers.", text: "Clear questions and plain-language check-ins got me fluent in the technical concepts." },
+  { title: "Make feedback easy to give.", text: "Keeping the process map in Miro let busy stakeholders weigh in on their own schedule." },
+  { title: "Systems speed up learning.", text: "A design system let us ship testable MVPs quickly, so we learned from real use sooner." },
+]} />
+
+</Section>

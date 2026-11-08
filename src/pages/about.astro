@@ -1,0 +1,282 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Picture from '../components/Picture.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { SITE } from '../data/site';
+
+const stats = [
+  { n: '10+', unit: 'Years', label: 'Systems, Brand, & Front-End Design' },
+  { n: '11+', unit: 'Industries', label: 'From FinTech, Education, & Healthcare to Civic Tech' },
+  { n: '$10K+', unit: 'Savings', label: 'Annual Operational & Vendor Cost Reductions' },
+  { n: '1st', unit: 'Gen', label: 'Higher Education & BFA Graduate' },
+];
+const intent = [
+  { title: 'Campaign Strategy & Growth', text: 'Designing high-converting digital & print campaigns for public sector audiences, including a Summer Meals strategy behind 319,000+ meals served.', proof: 'JCPS district-wide campaigns across 145 schools; #AtriaNextChapter with Billie Jean King; AIGA-recognized Showcase of Schools identity.' },
+  { title: 'Accessibility & Inclusive Design', text: 'Accessibility treated as strategy and governance, not a checklist.', proof: 'Founded A11Y at Atria with C-level budget; Concentrix Accessibility and Inclusion initiative; Fortune 500 audits; research with blind users.' },
+  { title: 'Service Design & Operations', text: 'Untangling cross-team workflows so the right thing becomes the easy thing.', proof: 'JCPS content vetting pipeline and approval playbook; $10K+ projected annual savings; promotion request redesign.' },
+];
+const scale = [
+  { title: 'Design-to-Code Architecture', text: 'Tokenizing UI components, building with Tailwind/CSS, and bridging Figma/Penpot directly into production.', proof: 'Full-stack design to deployment of JCPS school websites; Atria multi-brand design system; Concentrix tokenized design system.' },
+  { title: 'AI-Augmented Workflows', text: 'Pairing cloud models with local LLMs and agentic tooling (MCP) to scale creative production, matching each task to the right model and keeping sensitive data private.', proof: 'Early AI adoption at Concentrix; GenAI digital storefront prototype for cafeteria staff; AI design-to-code workflows with Gemini, Claude, and ChatGPT.' },
+];
+const roles = [
+  { years: '2025 – Present', title: 'Nutrition Initiatives Clerk', org: 'Jefferson County Public Schools', text: 'Lead end-to-end nutrition marketing across 145 schools: a content vetting pipeline projected to save $10K+ a year, and the Summer Meals digital strategy behind 319,000+ meals.' },
+  { years: '2022 – 2024', title: 'Senior Experience Designer', org: 'Concentrix Catalyst', text: "Founded the Accessibility & Inclusion initiative and a tokenized design system inside the firm's consulting product; led UX for enterprise clients and Fortune 500 accessibility audits." },
+  { years: '2020 – 2022', title: 'Lead UX/UI Designer', org: 'Atria Senior Living', text: "Built the senior living industry's first multi-brand design system, led UX for #AtriaNextChapter with Billie Jean King, and founded A11Y at Atria." },
+  { years: '2019 – 2020', title: 'Visual & Front-End Designer', org: 'Capture Higher Ed', text: 'Responsive landing pages, email templates and web forms for higher-ed recruitment campaigns.' },
+  { years: '2016 – 2019', title: 'Visual & Web Designer', org: 'Jefferson County Public Schools', text: 'Accessible, responsive school websites, and the Showcase of Schools identity and wayfinding (AIGA Louisville Honorable Mention).' },
+];
+const community = [
+  { name: 'Civic Data Alliance', years: '2015 – 2025', text: 'Board Member, User Experience. Human-centered design for open, accessible civic data.' },
+  { name: 'Louisville Makes Games', years: '2017 – 2025', text: 'Board Member, Game Art & Design. Workshops and programs that open game design to more people.' },
+  { name: 'Code:You (formerly Code Louisville)', years: '2018 – 2022', text: 'Mentor, Front-End Web Development & UX. Guided emerging coders and designers breaking into tech.' },
+];
+const learning = [
+  { name: 'BFA in Graphic Design', years: '2011', text: 'Western Kentucky University' },
+  { name: 'A+ Certification', years: '2025', text: 'CompTIA' },
+  { name: 'Data Analytics Certificate', years: '2023', text: 'University of Louisville & Louisville Central Community Centers. Power BI, data analysis, and data storytelling.' },
+  { name: 'Introduction to Web Accessibility', years: '2022', text: 'W3C, through edX' },
+  { name: 'UX Certification', years: '2021', text: 'Nielsen Norman Group' },
+  { name: 'AIGA Louisville Design Awards', years: '2018', text: 'Honorable Mention, Environmental Design / Wayfinding' },
+];
+---
+<Base title="About" current="About" description="Veronica Rivera is a product designer and design technologist in Louisville, KY, leading work from strategy to shipped code.">
+  <div class="about">
+    <section class="intro" aria-labelledby="about-title">
+      <div class="intro__text">
+        <p class="vr-eyebrow">About</p>
+        <h1 id="about-title" class="intro__title">I work where design, technology, and strategy meet.</h1>
+        <p class="intro__lead">I'm Veronica Rivera, a product designer and design technologist in Louisville, KY. I lead work from strategy to shipped code, turning complex systems into experiences that make a measurable difference in people's lives.</p>
+        <ul class="meta" aria-label="At a glance">
+          <li><Icon name="map-pin" size={20} />Louisville, KY</li>
+          <li><Icon name="calendar" size={20} />10+ years</li>
+          <li><Icon name="light-bulb" size={20} />BFA, Graphic Design</li>
+        </ul>
+        <p class="open-to"><span>Open to:</span> Product Design · Design Technology · Design Leadership</p>
+      </div>
+      <div class="intro__sunset" aria-hidden="true"><div class="intro__sunset-fill" data-parallax="-0.18" data-parallax-max="70"></div></div>
+      <div class="intro__photo"><div class="intro__photo-inner" data-parallax="0.1" data-parallax-max="56" data-parallax-mode="scroll"><Picture name="about-headshot" alt="Veronica Rivera" sizes="(min-width: 768px) 480px, 100vw" eager /></div></div>
+    </section>
+
+    <section class="story band" aria-labelledby="story-title">
+      <div class="story__head">
+        <p class="vr-eyebrow">My story</p>
+        <h2 id="story-title" class="vr-h2-page">From graphic design to product design</h2>
+      </div>
+      <div class="story__text">
+        <p>I started as a graphic designer with a BFA from Western Kentucky University, then taught myself to build what I designed, coding accessible websites for Louisville's public schools.</p>
+        <p>Since then, I've led UX and UI design for Atria Senior Living, where I built the industry's first multi-brand design system and founded the company's accessibility team. At Concentrix Catalyst, I founded an Accessibility and Inclusion initiative and folded a tokenized design system into the firm's consulting product for global clients.</p>
+        <p>Today, I lead the end-to-end design and execution of nutrition marketing for Jefferson County Public Schools across 145 schools in Louisville, KY, where my visual design and systems thinking drive student engagement and participation in the district's nutrition program. This summer, I led the Summer Meals digital marketing strategy that helped more than 319,000 meals reach kids in the community.</p>
+        <div class="thread">
+          <p class="vr-eyebrow">The thread</p>
+          <p class="thread__text">Listen deeply, design with intent, and build systems that bring clarity, color, and purpose to complex problems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="By the numbers">
+      <ul>
+        {stats.map((s, i) => (
+          <li class="stat">
+            <div class="stat__inner" data-parallax={String([0.03, 0.05, 0.07, 0.09][i])} data-parallax-max="24" data-parallax-mode="down">
+              <p class="stat__n"><span class="stat__big">{s.n}</span> {s.unit}</p>
+              <p class="stat__label">{s.label}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="pillars band band--surface" aria-labelledby="pillars-title">
+      <div class="section-head">
+        <p class="vr-eyebrow">What I bring</p>
+        <h2 id="pillars-title" class="vr-h2-page">Designing with Intent. Building at Scale.</h2>
+      </div>
+      {[{ name: 'Designing with Intent', items: intent }, { name: 'Building at Scale', items: scale }].map((g) => (
+        <div class="pillar-group">
+          <h3 class="pillar-group__name">{g.name}</h3>
+          <ul class:list={['pillar-cards', g.items.length === 2 && 'pillar-cards--two']}>
+            {g.items.map((p) => (
+              <li class="pillar">
+                <h4 class="pillar__title">{p.title}</h4>
+                <p class="pillar__text">{p.text}</p>
+                <div class="pillar__proof">
+                  <p class="pillar__proof-label">Proof</p>
+                  <p class="pillar__proof-text">{p.proof}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section class="experience band" aria-labelledby="exp-title">
+      <div class="experience__head">
+        <div class="section-head">
+          <p class="vr-eyebrow">Experience</p>
+          <h2 id="exp-title" class="vr-h2-page">Where I've Done the Work</h2>
+        </div>
+        {SITE.resumeUrl && (
+          <Button href={SITE.resumeUrl} variant="secondary">
+            <Icon name="arrow-down-tray" size={20} />Download résumé<span class="vr-sr"> (PDF)</span>
+          </Button>
+        )}
+      </div>
+      <ol class="timeline">
+        {roles.map((r) => (
+          <li class="role">
+            <p class="role__years">{r.years}</p>
+            <div class="role__who">
+              <h3 class="role__title">{r.title}</h3>
+              <p class="role__org">{r.org}</p>
+            </div>
+            <p class="role__text">{r.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="credentials band band--surface" aria-label="Community and credentials">
+      {[{ eyebrow: 'Giving back', title: 'Community', items: community }, { eyebrow: 'Learning', title: 'Education & Credentials', items: learning }].map((col) => (
+        <div class="cred-col">
+          <div class="section-head">
+            <p class="vr-eyebrow">{col.eyebrow}</p>
+            <h2 class="cred-col__title">{col.title}</h2>
+          </div>
+          <ul class="cred-list">
+            {col.items.map((i) => (
+              <li class="cred">
+                <div class="cred__top"><h3 class="cred__name">{i.name}</h3><p class="cred__years">{i.years}</p></div>
+                <p class="cred__text">{i.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <CallToAction />
+  </div>
+</Base>
+
+<style>
+
+  .band { padding: var(--space-9) var(--page-margin); }
+  .band--surface { background: var(--surface); --text-muted: var(--text-muted-surface); --accent-text: var(--accent-on-surface); }
+  .section-head { display: flex; flex-direction: column; gap: var(--space-2); }
+
+  /* Intro: text, a sunset strip and the headshot, flush */
+  .intro { display: grid; grid-template-columns: 1fr 160px 480px; min-height: 640px; }
+  .intro__text { align-self: center; padding: var(--space-8) var(--space-4) var(--space-8) var(--page-margin); display: flex; flex-direction: column; gap: var(--space-5); max-width: calc(680px + var(--page-margin) + var(--space-6)); }
+  .intro__title { font-size: 3.5rem; line-height: 1.15; font-weight: 400; }
+  .intro__lead { max-width: 600px; font-size: 1.2rem; line-height: 1.67; }
+  /* The strip's gradient and the photo are a little taller than their frames, so they can drift (parallax). */
+  .intro__sunset { position: relative; overflow: hidden; }
+  .intro__sunset-fill { position: absolute; left: 0; right: 0; top: -80px; bottom: -80px; background: linear-gradient(180deg, #ffcf8a 0%, #f772a8 100%); }
+  :global([data-theme='dark']) .intro__sunset-fill { background: linear-gradient(180deg, #003a6c 0%, #f772a8 60%, #ffcf8a 100%); }
+  .intro__photo { position: relative; overflow: hidden; background: var(--surface); }
+  .intro__photo-inner { position: absolute; left: 0; right: 0; top: -64px; bottom: 0; } /* extra image above the frame, since it only drifts down */
+  .intro__photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .stat__inner { display: flex; flex-direction: column; gap: var(--space-2); }
+  .meta { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+  .meta li, .open-to { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase; }
+  .meta li { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .meta :global(.vr-icon) { color: var(--accent-text); }
+  .open-to span { color: var(--accent-text); font-weight: 500; }
+
+  /* Story */
+  .story { display: grid; grid-template-columns: 400px minmax(0, 640px); gap: var(--space-9); }
+  .story__head { display: flex; flex-direction: column; gap: var(--space-2); }
+  .story__text { display: flex; flex-direction: column; gap: var(--space-5); }
+  .story__text > p { max-width: 600px; font-size: 18px; line-height: 1.67; }
+  .thread { display: flex; flex-direction: column; gap: var(--space-2); padding-top: var(--space-4); }
+  .thread__text { font-size: 2rem; line-height: 1.2; color: var(--heading); }
+
+  /* Stats: four flush color blocks */
+  .stats ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { min-height: 240px; padding: var(--space-7) var(--space-6) var(--space-7) var(--space-7); display: flex; flex-direction: column; gap: var(--space-2); color: var(--night); }
+  .stat__n { font-size: 24px; line-height: 1.1; color: var(--navy); }
+  .stat__big { font-size: 56px; }
+  .stat__label { max-width: 260px; font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase; }
+  .stat:nth-child(1) { background: var(--mist); }
+  .stat:nth-child(2) { background: var(--apricot); }
+  .stat:nth-child(3) { background: var(--rose); }
+  .stat:nth-child(4) { background: var(--navy); color: var(--ivory); }
+  .stat:nth-child(4) .stat__n { color: var(--apricot); }
+  :global([data-theme='dark']) .stat:nth-child(1) { background: #2a3237; color: var(--ivory); }
+  :global([data-theme='dark']) .stat:nth-child(1) .stat__n { color: var(--apricot); }
+  :global([data-theme='dark']) .stat:nth-child(4) { background: var(--mist); color: var(--night); }
+  :global([data-theme='dark']) .stat:nth-child(4) .stat__n { color: var(--navy); }
+
+  /* Pillars */
+  .pillars { display: flex; flex-direction: column; gap: var(--space-7); }
+  .pillar-group { display: flex; flex-direction: column; gap: var(--space-4); }
+  .pillar-group__name { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+  .pillar-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+  .pillar-cards--two { grid-template-columns: repeat(2, 1fr); }
+  .pillar { background: var(--background); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
+  .pillar__title { font-size: 1.5rem; line-height: 1.2; font-weight: 500; }
+  .pillar__text { line-height: 1.4; }
+  .pillar__proof { display: flex; flex-direction: column; gap: var(--space-1); padding-top: var(--space-2); }
+  .pillar__proof-label { font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); }
+  .pillar__proof-text { font-size: 0.9rem; line-height: 1.35; color: var(--text-muted); }
+
+  /* Experience */
+  .experience { display: flex; flex-direction: column; gap: 40px; }
+  .experience__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-5); }
+  .timeline { list-style: none; margin: 0; padding: 0; border-top: var(--border-width) solid var(--border); }
+  .role { display: grid; grid-template-columns: 200px 440px 1fr; gap: var(--space-6); padding: var(--space-5) 0; border-bottom: var(--border-width) solid var(--border); }
+  .role__years { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em; color: var(--text-muted); }
+  .role__who { display: flex; flex-direction: column; gap: var(--space-1); }
+  .role__title { font-size: 1.25rem; line-height: 1.3; font-weight: 500; }
+  .role__text { max-width: 608px; line-height: 1.4; }
+
+  /* Community and credentials */
+  .credentials { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-9); align-items: start; }
+  .cred-col { display: flex; flex-direction: column; gap: var(--space-5); }
+  .cred-col__title { font-size: 2rem; line-height: 1.2; font-weight: 400; }
+  .cred-list { list-style: none; margin: 0; padding: 0; border-top: var(--border-width) solid var(--border-strong); }
+  .cred { padding: var(--space-4) 0; border-bottom: var(--border-width) solid var(--border-strong); display: flex; flex-direction: column; gap: var(--space-1); }
+  .cred__top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); }
+  .cred__name { font-size: 18px; line-height: 1.4; font-weight: 500; color: var(--text); }
+  .cred__years { flex-shrink: 0; font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.04em; color: var(--text-muted); }
+  .cred__text { line-height: 1.4; }
+
+  @media (max-width: 1199.98px) {
+    .intro { grid-template-columns: 1fr 80px 40%; }
+    .story { grid-template-columns: 1fr; gap: var(--space-6); }
+    .role { grid-template-columns: 160px 1fr; }
+    .role__text { grid-column: 2; }
+    .pillar-cards { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 767.98px) {
+    .band { padding: var(--space-8) var(--page-margin); }
+    .intro { grid-template-columns: 1fr; min-height: 0; }
+    .intro__photo { order: -2; aspect-ratio: 3 / 4; max-height: 520px; }
+    .intro__sunset { order: -1; height: 56px; }
+    .intro__text { padding: 40px var(--page-margin) var(--space-7); gap: 20px; }
+    .intro__title { font-size: 34px; line-height: 1.2; }
+    .intro__lead { font-size: 17.6px; line-height: 1.6; }
+    .meta { flex-direction: column; gap: 10px; }
+    .story { padding-top: var(--space-4); gap: 20px; }
+    .story__text { gap: 20px; }
+    .story__text > p { font-size: 16px; line-height: 1.6; }
+    .thread__text { font-size: 20px; line-height: 1.45; }
+    .stats ul { grid-template-columns: 1fr 1fr; }
+    .stat { min-height: 210px; padding: var(--space-5) var(--space-4) calc(var(--space-5) + 24px); } /* room below for the 24px parallax drift */
+    .stat__big { font-size: 40px; }
+    .stat__n { font-size: 24px; } /* stays large text: navy on rose is 4:1 */
+    .pillars { gap: var(--space-5); }
+    .pillar-cards, .pillar-cards--two { grid-template-columns: 1fr; gap: var(--space-4); }
+    .pillar { padding: var(--space-5); }
+    .pillar__title { font-size: 20px; }
+    .experience { gap: var(--space-5); }
+    .role { grid-template-columns: 1fr; gap: var(--space-2); }
+    .role__text { grid-column: auto; }
+    .credentials { grid-template-columns: 1fr; gap: var(--space-7); }
+    .cred-col__title { font-size: 20px; line-height: 1.3; }
+  }
+</style>

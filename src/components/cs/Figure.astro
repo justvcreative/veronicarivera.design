@@ -1,0 +1,11 @@
+---
+/** A framed image with an optional caption (pass the caption as children). */
+import Picture from '../Picture.astro';
+interface Props { img: string; alt: string; plain?: boolean }
+const { img, alt, plain = false } = Astro.props;
+const hasCaption = Astro.slots.has('default');
+---
+<figure class:list={['cs-figure', plain && 'cs-figure--plain']}>
+  <div class="cs-figure__frame"><Picture name={img} alt={alt} sizes="(min-width: 768px) 720px, calc(100vw - 32px)" /></div>
+  {hasCaption && <figcaption class="cs-caption"><slot /></figcaption>}
+</figure>

@@ -1,0 +1,19 @@
+---
+/**
+ * Card grids: feature (surface panels), learning (numbered, outlined) and brand (image, title, text).
+ */
+import Picture from '../Picture.astro';
+type Item = { title: string; text: string; img?: string; alt?: string };
+interface Props { kind: 'feature' | 'learning' | 'brand'; items: Item[] }
+const { kind, items } = Astro.props;
+---
+<ul class:list={['cs-cards', `cs-cards--${kind}`]}>
+  {items.map((i, n) => (
+    <li class:list={['cs-card', `cs-card--${kind}`]}>
+      {kind === 'brand' && i.img && <div class="cs-card__media"><Picture name={i.img} alt={i.alt ?? ''} sizes="(min-width: 768px) 200px, calc(100vw - 64px)" /></div>}
+      {kind === 'learning' && <p class="cs-card__num" aria-hidden="true">{String(n + 1).padStart(2, '0')}</p>}
+      <h3 class="cs-card__title">{i.title}</h3>
+      <p class="cs-card__text">{i.text}</p>
+    </li>
+  ))}
+</ul>

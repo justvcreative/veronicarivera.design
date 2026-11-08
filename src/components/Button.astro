@@ -1,0 +1,16 @@
+---
+/** Button: primary (the one main action), secondary (outlined) or text. With `href` it renders a link styled as a button. */
+import type { HTMLAttributes } from 'astro/types';
+type Props = (HTMLAttributes<'button'> & HTMLAttributes<'a'>) & {
+  variant?: 'primary' | 'secondary' | 'text';
+  size?: 'md' | 'sm';
+  href?: string;
+};
+const { variant = 'primary', size = 'md', href, class: className, type = 'button', ...rest } = Astro.props;
+const cls = ['vr-btn', `vr-btn--${variant}`, size === 'sm' && 'vr-btn--sm', className];
+---
+{href ? (
+  <a href={href} class:list={cls} {...rest}><slot /></a>
+) : (
+  <button type={type as 'button' | 'submit' | 'reset'} class:list={cls} {...rest}><slot /></button>
+)}

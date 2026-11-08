@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+<Base title="Veronica Rivera" description="Veronica Rivera is a product designer and design technologist in Louisville, KY, who turns complex systems into experiences that make a measurable difference in people's lives.">
+  <section class="hero">
+    <div class="hero__text">
+      <h1 class="hero__title">Designing with Intent.<br />Building at Scale.</h1>
+      <p class="hero__intro">I'm Veronica Rivera. I start with empathy and turn complex systems into experiences that make a measurable difference in people's lives.</p>
+      <div class="hero__buttons">
+        <Button href="/work/">See my work</Button>
+        <Button href="/about/" variant="secondary">About me</Button>
+      </div>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="art art--sunrise grain"></div>
+      <div class="art art--quiet grain"></div>
+      <div class="art art--warm grain"></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    --sunrise: radial-gradient(ellipse 150% 68% at 0% 100%, #ffcf8a 0%, rgba(247, 114, 168, 0.85) 42%, #dfe5e8 78%, #fbf7ef 100%);
+    --quiet: conic-gradient(from 180deg at 50% 50%, #fbf7ef 0deg, #eceae4 160deg, #dfe5e8 270deg 360deg);
+    --warm: conic-gradient(from 0deg at 50% 50%, #f772a8 0deg, #fb9b9c 170deg, #ffcf8a 360deg);
+    display: grid;
+    grid-template-columns: 1fr clamp(200px, 22.2vw, 320px) clamp(200px, 22.2vw, 320px);
+    min-height: 816px;
+  }
+  :global([data-theme='dark']) .hero {
+    --sunrise: radial-gradient(ellipse 150% 68% at 0% 100%, #ffcf8a 0%, #f772a8 40%, #003a6c 75%, #13181b 100%);
+    --quiet: conic-gradient(from 180deg at 50% 50%, #13181b 0deg, #0a2b4b 160deg, #003a6c 270deg 360deg);
+  }
+  .hero__text {
+    align-self: center;
+    padding: var(--space-9) var(--space-3) var(--space-9) var(--page-margin);
+    display: flex; flex-direction: column; gap: var(--space-4);
+    max-width: calc(660px + var(--page-margin));
+  }
+  /* Sized from the text column's real width (viewport − two gradient columns − margins − room for a
+     Windows scrollbar), so both lines fit at 64px on a 1440 screen and shrink on smaller laptops. */
+  .hero__title { font-size: clamp(2.5rem, calc((55.6vw - 173px) / 9.95), 4rem); line-height: 1.2; font-weight: 400; white-space: nowrap; }
+  .hero__intro { max-width: 480px; font-size: 1.2rem; line-height: 1.67; }
+  .hero__buttons { display: flex; flex-wrap: wrap; gap: var(--space-4) 26px; }
+  .hero__art { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .art--sunrise { grid-row: 1 / 3; background: var(--sunrise); }
+  .art--quiet { background: var(--quiet); }
+  .art--warm { background: var(--warm); }
+
+  /* A fine film grain over the gradients, as in the inspiration. */
+  .grain { position: relative; }
+  .grain::after {
+    content: ''; position: absolute; inset: 0; opacity: 0.07; mix-blend-mode: multiply; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 1023.98px) {
+    .hero {
+      --sunrise: radial-gradient(ellipse 150% 42% at 0% 100%, #ffcf8a 0%, rgba(247, 114, 168, 0.8) 50%, rgba(247, 114, 168, 0) 100%),
+        linear-gradient(180deg, #fbf7ef 25%, #dfe5e8 100%);
+      /* Conic sweeps around each block's center, as in the From Paper phone concept:
+         the seams run toward each other: right from the quiet block's center, left from the warm block's. */
+      --quiet: conic-gradient(from 90deg at 50% 50%, #fbf7ef 0deg, #e6e7e3 170deg, #dfe5e8 270deg, #ecebe6 360deg);
+      --warm: conic-gradient(from 270deg at 50% 50%, #fb9a9d 0deg, #f97fa5 70deg, #f772a8 130deg, #ffcf8a 210deg, #fdbf8c 290deg, #fba893 360deg);
+      grid-template-columns: 1fr 1fr; grid-template-rows: minmax(548px, auto) 200px; min-height: 0;
+    }
+    :global([data-theme='dark']) .hero {
+      --sunrise: radial-gradient(ellipse 150% 42% at 0% 100%, #ffcf8a 0%, #f772a8 50%, rgba(247, 114, 168, 0) 100%),
+        linear-gradient(180deg, #13181b 30%, #003a6c 100%);
+      --quiet: conic-gradient(from 90deg at 50% 50%, #003a6c 0deg, #0b2846 160deg, #13181b 270deg, #1d2f44 360deg);
+    }
+    .hero__text { grid-column: 1 / 3; grid-row: 1; align-self: start; position: relative; z-index: 1; padding: 57px var(--page-margin) 200px; max-width: none; gap: var(--space-5); }
+    .hero__title { font-size: 34px; line-height: 1.18; white-space: normal; }
+    .hero__intro { font-size: 17.6px; line-height: 1.6; max-width: 36rem; }
+    .hero__buttons { gap: var(--space-4); }
+    .hero__art { display: contents; }
+    .art--sunrise { grid-column: 1 / 3; grid-row: 1; }
+    .art--quiet { grid-column: 1; grid-row: 2; }
+    .art--warm { grid-column: 2; grid-row: 2; }
+  }
+</style>

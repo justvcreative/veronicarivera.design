@@ -1,0 +1,13 @@
+---
+/** Callout: a panel with a rose accent bar, a mono label and a large line. Without a label it's a pull quote. */
+interface Props { label?: string }
+const { label } = Astro.props;
+---
+{label ? (
+  <div class="cs-callout">
+    <p class="cs-callout__label">{label}</p>
+    <div class="cs-callout__text"><slot /></div>
+  </div>
+) : (
+  <blockquote class="cs-callout cs-callout--quote"><div class="cs-callout__text"><slot /></div></blockquote>
+)}

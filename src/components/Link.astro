@@ -1,0 +1,7 @@
+---
+/** Link: always underlined. `external` opens a new tab, adds an arrow and tells screen readers. */
+import Icon from './Icon.astro';
+interface Props { href: string; external?: boolean; class?: string }
+const { href, external = false, class: className } = Astro.props;
+---
+<a href={href} class:list={['vr-link', className]} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}><slot />{external && <><Icon name="arrow-up-right" class="vr-link__ext" /><span class="vr-sr"> (opens in a new tab)</span></>}</a>

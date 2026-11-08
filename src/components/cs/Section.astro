@@ -1,0 +1,12 @@
+---
+/** A numbered case study section: "01" in mono accent, then the heading. */
+interface Props { id: string; n: string; title: string }
+const { id, n, title } = Astro.props;
+---
+<section class="cs-section" id={id} aria-labelledby={`${id}-title`} data-cs-section>
+  <div class="cs-section__head">
+    <p class="cs-section__num" aria-hidden="true">{n}</p>
+    <h2 class="cs-section__title" id={`${id}-title`}><span class="vr-sr">{n}. </span>{title}</h2>
+  </div>
+  <slot />
+</section>

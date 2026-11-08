@@ -1,0 +1,8 @@
+---
+/** "At a glance" stat cards. */
+interface Props { items: { value: string; label: string }[] }
+const { items } = Astro.props;
+---
+<ul class="cs-stats" aria-label="At a glance">
+  {items.map((i) => (<li class="cs-stat"><p class="cs-stat__value">{i.value}</p><p class="cs-stat__label">{i.label}</p></li>))}
+</ul>

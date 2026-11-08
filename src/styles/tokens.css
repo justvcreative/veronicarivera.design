@@ -1,0 +1,152 @@
+/*
+ * Veronica Rivera design tokens, from the design system's tokens.json.
+ * Light is the default set; Dark applies with [data-theme="dark"] (set before first paint
+ * by the inline theme script) or, without JavaScript, from prefers-color-scheme.
+ */
+:root {
+  /* Palette */
+  --ivory: #fbf7ef;
+  --mist: #dfe5e8;
+  --navy: #003a6c;
+  --night: #13181b;
+  --rose: #f772a8;
+  --rose-deep: #c8006a;
+  --apricot: #ffcf8a;
+
+  /* Type */
+  --font-sans: "Maven Pro", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Spacing (4px scale, in rem so it grows with the reader's text size) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Corners */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 12px; /* Case Study cards and panels (Penpot Case Study components) */
+  --radius-full: 9999px;
+
+  /* Layout */
+  --measure: 65ch;
+  --content-max: 72rem; /* 1152px */
+  --grid-gutter: 1.5rem;
+  --grid-gutter-phone: 1rem;
+  --grid-margin-tablet: 2rem;
+  --grid-margin-phone: 1rem;
+  --target-min: 44px;
+  --border-width: 1px;
+
+  /* Gradients */
+  --gradient-conic-rose-apricot: conic-gradient(from 90deg at 0% 0%, #f772a8 0deg, #ffcf8a 90deg);
+  --gradient-conic-mist-ivory: conic-gradient(from 90deg at 0% 0%, #dfe5e8 0deg, #fbf7ef 90deg);
+  --gradient-conic-night-navy: conic-gradient(from 90deg at 0% 0%, #13181b 0deg, #003a6c 90deg);
+
+  /* Light roles */
+  --background: var(--ivory);
+  --surface: var(--mist);
+  --text: var(--night);
+  --text-muted: #5f686e;
+  --text-muted-surface: #4b5459; /* muted text on mist panels: 6.1:1 (text-muted is 4.4:1 there) */
+  --accent-on-surface: var(--rose-deep);
+  --heading: var(--navy);
+  --link: var(--navy);
+  --link-hover: var(--rose-deep);
+  --accent-text: var(--rose-deep);
+  --button-bg: var(--rose-deep);
+  --button-text: var(--ivory);
+  --button-bg-hover: var(--navy);
+  --border: #d4d8da;
+  --border-strong: #768087;
+  --focus: var(--navy);
+  --error: #b42318;
+  --success: #046c7a;
+  --nav-name: var(--navy);
+  --card-bg: #ffffff; /* screenshot frames and brand cards in the case studies */
+
+  --shadow-sm: 0 1px 2px rgba(19, 24, 27, 0.06);
+  --shadow-md: 0 4px 12px rgba(19, 24, 27, 0.08), 0 1px 2px rgba(19, 24, 27, 0.04);
+  --shadow-lg: 0 12px 32px rgba(19, 24, 27, 0.12), 0 2px 4px rgba(19, 24, 27, 0.04);
+  --focus-ring: 0 0 0 2px #fbf7ef, 0 0 0 4px #003a6c;
+
+  --gradient-sunset: linear-gradient(180deg, #fbf7ef 0%, #dfe5e8 35%, #f772a8 75%, #ffcf8a 100%);
+  --gradient-quiet: var(--gradient-conic-mist-ivory);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --background: var(--night);
+  --surface: var(--navy);
+  --text: var(--ivory);
+  --text-muted: #9aa4aa;
+  --text-muted-surface: #b4bdc2;
+  --accent-on-surface: var(--apricot); /* rose on navy is only 4.35:1 */
+  --heading: var(--apricot);
+  --link: var(--apricot);
+  --link-hover: var(--rose);
+  --accent-text: var(--rose);
+  --button-bg: var(--rose);
+  --button-text: var(--night);
+  --button-bg-hover: var(--apricot);
+  --border: #2a3237;
+  --border-strong: #808b91;
+  --focus: var(--apricot);
+  --error: #ff9b8f;
+  --success: #6fd3df;
+  --nav-name: var(--ivory);
+  --card-bg: #1c2327;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 247, 239, 0.06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(251, 247, 239, 0.08);
+  --focus-ring: 0 0 0 2px #13181b, 0 0 0 4px #ffcf8a;
+
+  --gradient-sunset: linear-gradient(180deg, #13181b 0%, #003a6c 30%, #f772a8 70%, #ffcf8a 100%);
+  --gradient-quiet: var(--gradient-conic-night-navy);
+
+  color-scheme: dark;
+}
+
+/* No JavaScript: follow the device setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: var(--night);
+    --surface: var(--navy);
+    --text: var(--ivory);
+    --text-muted: #9aa4aa;
+    --text-muted-surface: #b4bdc2;
+    --accent-on-surface: var(--apricot);
+  --text-muted-surface: #b4bdc2;
+  --accent-on-surface: var(--apricot); /* rose on navy is only 4.35:1 */
+    --heading: var(--apricot);
+    --link: var(--apricot);
+    --link-hover: var(--rose);
+    --accent-text: var(--rose);
+    --button-bg: var(--rose);
+    --button-text: var(--night);
+    --button-bg-hover: var(--apricot);
+    --border: #2a3237;
+    --border-strong: #808b91;
+    --focus: var(--apricot);
+    --error: #ff9b8f;
+    --success: #6fd3df;
+    --nav-name: var(--ivory);
+    --card-bg: #1c2327;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 247, 239, 0.06);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(251, 247, 239, 0.08);
+    --focus-ring: 0 0 0 2px #13181b, 0 0 0 4px #ffcf8a;
+    --gradient-sunset: linear-gradient(180deg, #13181b 0%, #003a6c 30%, #f772a8 70%, #ffcf8a 100%);
+    --gradient-quiet: var(--gradient-conic-night-navy);
+    color-scheme: dark;
+  }
+}

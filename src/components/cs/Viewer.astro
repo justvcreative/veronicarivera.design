@@ -1,0 +1,24 @@
+---
+/** The step and slide viewer: one modal dialog per page, filled in by src/scripts/casestudy.ts. */
+import Icon from '../Icon.astro';
+---
+<dialog class="viewer" aria-labelledby="viewer-title" data-viewer>
+  <div class="viewer__inner">
+    <header class="viewer__head">
+      <div>
+        <p class="viewer__label" data-viewer-label></p>
+        <h2 class="viewer__title" id="viewer-title" data-viewer-title></h2>
+      </div>
+      <button type="button" class="viewer__close" data-viewer-close><Icon name="x-mark" size={20} />Close</button>
+    </header>
+    <div class="viewer__stage">
+      <button type="button" class="viewer__nav viewer__nav--prev" aria-label="Previous" data-viewer-prev><Icon name="chevron-left" /></button>
+      <div class="viewer__media" tabindex="0" data-viewer-media aria-label="Image, scrollable"><img alt="" data-viewer-img /></div>
+      <button type="button" class="viewer__nav viewer__nav--next" aria-label="Next" data-viewer-next><Icon name="chevron-right" /></button>
+    </div>
+    <footer class="viewer__foot">
+      <p class="viewer__text" data-viewer-text></p>
+      <div class="viewer__count"><span class="viewer__dots" data-viewer-dots aria-hidden="true"></span><span data-viewer-count></span></div>
+    </footer>
+  </div>
+</dialog>

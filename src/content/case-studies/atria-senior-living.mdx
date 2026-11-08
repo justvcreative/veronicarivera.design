@@ -1,0 +1,200 @@
+---
+title: "Atria Senior Living: One System, Every Front Door"
+description: "How Veronica Rivera turned inherited Sketch files into a 100+ component design system that still runs three live senior living brands."
+order: 3
+next: jcps-showcase-of-schools
+teaser: "Atria Senior Living: building the senior living industry's first multi-brand design system"
+card:
+  title: "Atria Senior Living"
+  eyebrow: "Case study · Design systems"
+  summary: "Turned inherited Sketch files into a 100+ component design system that still runs three live brands."
+  image: work-atria
+  alt: "The Atria Senior Living website on a desktop browser, a tablet and a phone."
+  tags: ["Design systems", "Multi-brand"]
+hero:
+  eyebrow: "Case study · Design systems · Multi-brand"
+  title: "One System, Every Front Door"
+  lead: "As Lead UX/UI Designer, I turned inherited Sketch files into a 100+ component design system for Atria Senior Living. Years later, it still runs three live brands: Atria Senior Living, Holiday by Atria and Coterie Senior Living."
+  image: atria-hero
+  imageAlt: "The homepages of Atria Senior Living, Holiday by Atria and Coterie Senior Living in three browser windows, all built on the same design system."
+  visual: composite
+sections:
+  - { id: overview, title: "Overview" }
+  - { id: challenge, title: "The challenge" }
+  - { id: solution, title: "The solution" }
+  - { id: process, title: "Process" }
+  - { id: scaling, title: "Scaling to new brands" }
+  - { id: impact, title: "Impact" }
+  - { id: learned, title: "What I learned" }
+---
+
+<Section id="overview" n="01" title="Overview">
+
+Atria Senior Living needed a new website, and a way to keep every page consistent and accessible as the site grew. I turned an outsourced designer's Sketch files into a component-based design system in Figma, then used it to design the new Atria site in desktop, tablet and phone layouts.
+
+<ProjectDetails items={[
+  { label: "Role", value: "Lead UX/UI Designer" },
+  { label: "Timeline", value: "2021 to 2022 · about a year to the Atria launch" },
+  { label: "Team", value: "Product owner, department VP and developers; Via Studios built about half the components under my review" },
+  { label: "Stack", value: "Figma · WordPress with Nuxt.js and Bootstrap 4" },
+]} />
+
+<p class="cs-caption cs-live-sites">Live sites: <Link href="https://www.atriaseniorliving.com/" external>AtriaSeniorLiving.com</Link> · <Link href="https://www.holidayseniorliving.com/" external>HolidaySeniorLiving.com</Link> · <Link href="https://www.coterieseniorliving.com/" external>CoterieSeniorLiving.com</Link></p>
+
+<Stats items={[
+  { value: "100+", label: "components, each with responsive layouts and states" },
+  { value: "3 brands", label: "still running on the system today" },
+  { value: "WCAG AA", label: "the accessibility standard from day one" },
+]} />
+
+</Section>
+
+<Section id="challenge" n="02" title="The challenge">
+
+Choosing senior living is rarely a casual decision. It usually involves an older adult weighing a major life change and family members trying to help, often from a distance. For many of them, the website is the first place they meet Atria.
+
+Small type, low-contrast color and confusing navigation are minor annoyances for some people. For seniors with changing vision, dexterity or confidence with technology, they decide whether someone finds help or gives up. So the system treats those users as the primary audience, not an edge case.
+
+The scale raised the stakes further. When Atria announced the Holiday deal in June 2021, the combined company operated 447 communities across 45 states and seven Canadian provinces. A system that works for one community has to work for hundreds.
+
+The old site was hard to maintain and had accessibility problems throughout. Before I joined, an outsourced designer had started new designs in Sketch, but they didn't fit the developers' Bootstrap grid, had no tablet views, used inconsistent colors, type and buttons, and came with no icons, prototypes or documentation.
+
+Before the relaunch, I improved the existing site using Hotjar data and flagged usability issues such as competing calls to action, hard-to-use arrows and uneven spacing. Changes were then frozen while engineering built Atria's new website platforms, so the rest had to be solved in the new system.
+
+<Callout label="The question I set out to answer">
+How might we turn inherited, inconsistent designs into one accessible, component-based system that developers can build on, page after page and brand after brand?
+</Callout>
+
+<Figure img="atria-before" alt="AtriaSeniorLiving.com in September 2015, March 2021 and March 2022, with six problems marked: the same homepage template from 2015 to 2022, white text over photos, small low-contrast utility links, competing calls to action above the fold, hero arrows that were hard to use, and cramped, uneven hero spacing.">
+Before: AtriaSeniorLiving.com kept the same homepage template from 2015 to 2022. Screenshots via the Wayback Machine.
+</Figure>
+
+</Section>
+
+<Section id="solution" n="03" title="The solution">
+
+A design system in two layers, built on accessible, swappable brand foundations. Every page on the new site is assembled from it, and so is every page on the brands that came after.
+
+<Slideshow label="Foundational components" slides={[
+  { img: "atria-slide-1", title: "Schedule My Tour: the moment of commitment", caption: "The tour is where a family's research becomes a real visit, so this form had to feel calm and effortless. I kept required details up front and marked care preferences optional. The primary action uses Dark Brown on Bright Green at 5.39:1, because white on that green only reaches 1.66:1.", alt: "The Schedule My Tour form on a dark brown panel, annotated: white on Dark Brown at 8.94:1, required and optional fields clearly labeled, and Dark Brown on Bright Green at 5.39:1 for the Schedule My Tour button." },
+  { img: "atria-slide-2", title: "Chatbot: designed for the unhappy path too", caption: "Asking for help can be the most vulnerable moment on a senior living site. I designed the whole conversation, from a friendly invitation to new messages, validation errors and a live chat, and adapted it for mobile. A real person's face and a plain \"Hi, I'm here to help\" keep it from feeling like a support ticket.", alt: "The chat widget in four states, invite, open, error and conversation, plus the collapsed new-message bar and the mobile chat button." },
+  { img: "atria-slide-3", title: "Email Signup: a low-pressure way to stay close", caption: "Not every family is ready to tour, and this form keeps them close until they are. It only asks for an email, with names optional. White on Dark Purple reaches 16.6:1, so it stands out on the page and stays easy to read.", alt: "The Stay in the know email signup form on dark purple, annotated: white on Dark Purple at 16.6:1, only the email is required, and Dark Brown on Bright Green at 5.39:1 for the Subscribe button." },
+  { img: "atria-slide-4", title: "Communities Nearby: decision-making at a glance", caption: "Families compare location, price and care level at once, so each card answers those questions in the same order. A compact tag system (AL, IL, MC, ST) makes care types scannable, and this structure carries across desktop, tablet and phone.", alt: "Three community cards side by side, each with name, address, phone, photo, starting price, care type tags and amenity icons, annotated to show the same order on every card and care types scannable at a glance." },
+  { img: "atria-slide-5", title: "Featured Amenities: why I chose this over navigation", caption: "Navigation is expected, but amenities are what help seniors and their loved ones picture life in a community. So I started with Font Awesome and custom-drew many of the icons where the set fell short, refining them with feedback from creative, engineering and executive partners. It's a small detail that carries real decision-making weight.", alt: "A community's featured amenities and full amenities list beside a grid of custom line icons such as Grille, Cocktail Lounge, Hot Tub, Indoor Swimming Pool, Walking Path and Library." },
+  { img: "atria-slide-6", title: "Communities Nearby and Recently Viewed: support without interruption", caption: "Choosing a community takes many return visits. This widget opens over the page without taking the visitor out of it and shows three communities nearby. Once someone has visited an Atria community page, it changes to Recently Viewed and shows the last three communities they looked at, so they can pick up where they left off. Each version has closed and open states tailored to desktop, tablet and phone.", alt: "The Atria homepage with the Communities Nearby panel open over the bottom of the page showing three communities, and the closed tab beside it." },
+]} />
+
+### What the system includes
+
+<Cards kind="feature" items={[
+  { title: "Accessible foundations", text: "Type and color styles that meet WCAG AA, with a cheat sheet of which color pairs pass and which to never use." },
+  { title: "Building blocks", text: "Grids, buttons, form inputs, icons, modals, links and accordions, each with hover and interaction states." },
+  { title: "Foundational components", text: "Complete features like Schedule My Tour, each with desktop, tablet and phone layouts and every state." },
+  { title: "Swappable brand foundations", text: "Colors, logos and type sit in one layer, so a new brand only changes that layer." },
+]} />
+
+</Section>
+
+<Section id="process" n="04" title="Process">
+
+I started by taking stock of what already existed, then built the system from the foundations up, side by side with the developers.
+
+<Steps>
+<Step n={1} total={5} title="Audit and architecture" img="atria-step-1" summary="I moved the Sketch files into Figma and audited them with the product owner, listing every existing component in a spreadsheet." alt="A recreated sitemap of AtriaSeniorLiving.com before the redesign, with sticky notes: three levels deep under Financial Planning, some communities had 11 subpages and others only one, and extras varied by community.">
+
+I moved the Sketch files into Figma and audited them with the product owner, listing every existing component in a spreadsheet.
+
+- Defined the sitemap, component list and required pages with the product owner and our VP
+- Let analytics, Hotjar and SEO data drive the content strategy
+
+</Step>
+<Step n={2} total={5} title="Designing and building in parallel" img="atria-step-2" summary="This was Atria's first web project where design and engineering ran at the same time, working in Agile and Scrum teams." alt="A gallery modal design with its title, image, caption and position numbered, beside pseudocode for the matching GalleryItem data structure from the headless WordPress CMS.">
+
+This was Atria's first web project where design and engineering ran at the same time, working in Agile and Scrum teams.
+
+- Shared clickable prototypes and Figma code snippets, so design and engineering stayed aligned on product requirements
+- Agreed on each component's data structure early, so engineers could start the headless WordPress CMS, built on Rust, while I designed
+- Engineering feedback shaped the designs, and every update reached the team
+
+</Step>
+<Step n={3} total={5} title="Accessible foundations" img="atria-step-3" contain summary="We targeted WCAG AA, documented it in the system, and engineering made accessibility part of QA." alt="Atria's brand, background and utility colors with their hex values, and a note linking to the tool that shows which color combinations are accessible.">
+
+We targeted WCAG AA, documented it in the system, and engineering made accessibility part of QA.
+
+- Typography guidelines with minimum sizes, heading styles and mobile type
+- A color cheat sheet showing which pairs pass AA, pass AAA or should never be used
+
+</Step>
+<Step n={4} total={5} title="Building blocks, then components" img="atria-step-4" summary="The library grew past 100 components in two layers." alt="Form field building blocks in default, error and disabled states, including text inputs, search fields and dropdowns with help text.">
+
+The library grew past 100 components in two layers.
+
+- Building blocks with working hover and interaction states
+- Foundational components with every state, like the Email Sign-Up Form's errors, messages and success
+
+</Step>
+<Step n={5} total={5} title="Assembling the pages" img="atria-step-5" summary="I designed every brand page in separate desktop, tablet and phone Figma files, plus a Find a Community experience." alt="The Atria homepage hero, Every resident has a story, shown on a desktop browser, a tablet and a phone.">
+
+I designed every brand page in separate desktop, tablet and phone Figma files, plus a Find a Community experience.
+
+- Separate files kept components from mixing and made prototyping easier
+- Refined spacing as real copy and images landed, and documented it for developers
+
+</Step>
+</Steps>
+
+<Callout label="The hardest part: content">
+The copywriter worked on a different team and wrote without seeing the designs, so copy often didn't fit the components. We worked through it with feedback and revisions, and I adjusted some components where the content made a better case.
+</Callout>
+
+</Section>
+
+<Section id="scaling" n="05" title="Scaling to new brands">
+
+While the Atria site was about 80% through its brand pages, Atria acquired Holiday, now Holiday by Atria, which managed 240 communities in 43 states. Its website needed an overhaul too.
+
+Because the foundations were swappable, we duplicated the Atria library and replaced the colors, logos and typography with Holiday's. The whole library took on the Holiday brand at once, and an outsourced designer was productive almost immediately. Coterie Senior Living later launched on the same system with only minor brand differences.
+
+<Cards kind="brand" items={[
+  { title: "Atria Senior Living", text: "The first brand on the system, and the site I designed page by page.", img: "atria-brand-1", alt: "The Atria Senior Living homepage." },
+  { title: "Holiday by Atria", text: "Reskinned by swapping foundations after the acquisition, then renamed.", img: "atria-brand-2", alt: "The Holiday by Atria homepage." },
+  { title: "Coterie Senior Living", text: "Atria's luxury brand with Related Companies, built on the same system.", img: "atria-brand-3", alt: "The Coterie Senior Living homepage." },
+]} />
+
+<Caption>One library, three brands: each keeps its own colors, logo and type on shared components.</Caption>
+
+</Section>
+
+<Section id="impact" n="06" title="Impact">
+
+The system outlasted the project. All three Atria brand sites still run on the foundation I built in 2021 to 2022. Other designers and studio partners have since refined it, and it has been through an acquisition, a rebrand and a new luxury brand launch without a rebuild.
+
+### What the system delivered
+
+<Outcomes items={[
+  { value: "Three live brands on one system", label: "Each keeps its own identity on shared components." },
+  { value: "100+ components", label: "Each with responsive layouts, states and developer documentation." },
+  { value: "About a year", label: "From inherited Sketch files to a launched Atria site." },
+  { value: "New brands without starting over", label: "Holiday's library took on its new brand through the foundations, and Coterie followed the same path." },
+  { value: "The accessibility bar held", label: "One shared Accessibility Policy covers all three sites and states they conform to WCAG 2.1 AA." },
+]} />
+
+<p class="cs-live"><strong>See it live:</strong> <Link href="https://www.atriaseniorliving.com/" external>AtriaSeniorLiving.com</Link> · <Link href="https://www.holidayseniorliving.com/" external>HolidaySeniorLiving.com</Link> · <Link href="https://www.coterieseniorliving.com/" external>CoterieSeniorLiving.com</Link></p>
+
+</Section>
+
+<Section id="learned" n="07" title="What I learned">
+
+<Cards kind="learning" items={[
+  { title: "Inherited work is a starting point, not a verdict.", text: "Auditing someone else's designs gave us a fast, honest inventory to build from." },
+  { title: "Design and engineering move faster together.", text: "Agreeing on component architecture early let both teams work in parallel." },
+  { title: "Solve accessibility once, at the foundation.", text: "A color and type system that encodes the rules means nobody has to remember them." },
+  { title: "Build for the brand you don't have yet.", text: "Swappable foundations turned an acquisition and a rebrand into reskins instead of rebuilds." },
+  { title: "Content is part of the system.", text: "The copy gap taught me to bring writers into the component library early." },
+]} />
+
+<Callout label="What I'd do next">
+If I started this system today, AI and design-to-code workflows would change the timeline and the process. Craft, creative direction and vision would still depend on a designer's judgment. That's the challenge I want next: doing this work at scale with agentic tools while holding that bar.
+</Callout>
+
+</Section>

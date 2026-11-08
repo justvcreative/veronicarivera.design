@@ -1,0 +1,8 @@
+---
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<div class="cs-feedback">
+  <p class="cs-feedback__label">{label}</p>
+  <div class="cs-feedback__text"><slot /></div>
+</div>

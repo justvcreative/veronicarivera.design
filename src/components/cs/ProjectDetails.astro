@@ -1,0 +1,7 @@
+---
+interface Props { items: { label: string; value: string }[] }
+const { items } = Astro.props;
+---
+<dl class="cs-details">
+  {items.map((i) => (<div class="cs-details__item"><dt>{i.label}</dt><dd>{i.value}</dd></div>))}
+</dl>

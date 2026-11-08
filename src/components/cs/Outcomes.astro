@@ -1,0 +1,14 @@
+---
+/** Outcome rows: a check, a short result and a line of detail. */
+import Icon from '../Icon.astro';
+interface Props { items: { value: string; label: string }[] }
+const { items } = Astro.props;
+---
+<ul class="cs-outcomes">
+  {items.map((i) => (
+    <li class="cs-outcome">
+      <span class="cs-outcome__check" aria-hidden="true"><Icon name="check" size={16} /></span>
+      <div><p class="cs-outcome__title">{i.value}</p><p class="cs-outcome__text">{i.label}</p></div>
+    </li>
+  ))}
+</ul>
