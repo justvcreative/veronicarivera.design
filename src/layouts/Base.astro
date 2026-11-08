@@ -37,6 +37,10 @@ const ogImage = new URL(image, SITE.url).href;
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    {import.meta.env.PROD && (
+      /* Cloudflare Web Analytics: cookie-free; live builds only, so local testing isn't counted. */
+      <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b355d47ed2df40c78107ad64ac9be9f2"}'></script>
+    )}
     <!-- Theme before first paint: saved Light/Dark, or Auto (follow the device). -->
     <script is:inline>
       (function () {
