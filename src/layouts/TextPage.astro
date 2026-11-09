@@ -1,0 +1,40 @@
+---
+/** A simple reading page (Privacy, Accessibility): eyebrow, title, lead, a dated line, then prose. */
+import Base from './Base.astro';
+interface Props { title: string; description: string; eyebrow: string; heading: string; lead: string; meta?: string }
+const { title, description, eyebrow, heading, lead, meta } = Astro.props;
+---
+<Base title={title} description={description}>
+  <article class="text-page">
+    <header class="text-page__head">
+      <p class="vr-eyebrow">{eyebrow}</p>
+      <h1 class="text-page__title">{heading}</h1>
+      <p class="text-page__lead">{lead}</p>
+      {meta && <p class="text-page__meta">{meta}</p>}
+    </header>
+    <div class="prose"><slot /></div>
+  </article>
+</Base>
+
+<style>
+  .text-page { max-width: calc(var(--content-max) + 2 * var(--page-margin)); margin: 0 auto; padding: var(--space-9) var(--page-margin) 120px; }
+  .text-page__head, .prose { max-width: 760px; }
+  .text-page__head { display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-7); }
+  .text-page__title { font-size: 3rem; line-height: 1.2; font-weight: 400; }
+  .text-page__lead { font-size: 1.2rem; line-height: 1.67; }
+  .text-page__meta { font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.04em; color: var(--text-muted); }
+  .prose :global(h2) { font-size: 1.75rem; line-height: 1.2; font-weight: 500; margin: var(--space-7) 0 var(--space-3); }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(p), .prose :global(li) { font-size: 18px; line-height: 1.67; }
+  .prose :global(p + p), .prose :global(p + ul), .prose :global(ul + p) { margin-top: var(--space-3); }
+  .prose :global(ul) { margin: var(--space-3) 0 0; padding-left: 1.25em; }
+  .prose :global(a) { color: var(--link); text-decoration: underline; text-underline-offset: 0.2em; font-weight: 500; }
+  .prose :global(a:hover) { color: var(--link-hover); text-decoration-thickness: 2px; }
+  @media (max-width: 767.98px) {
+    .text-page { padding: var(--space-8) var(--page-margin); }
+    .text-page__title { font-size: 34px; }
+    .text-page__lead { font-size: 17.6px; line-height: 1.6; }
+    .prose :global(h2) { font-size: 24px; line-height: 1.25; margin-top: var(--space-6); }
+    .prose :global(p), .prose :global(li) { font-size: 16px; line-height: 1.6; }
+  }
+</style>

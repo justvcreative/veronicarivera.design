@@ -31,7 +31,13 @@ const [t1, t2] = SITE.tagline.split(/(?<=\.)\s+/);
         </ul>
       )}
     </div>
-    <p class="footer__copy">© {year} {SITE.name}</p>
+    <div class="footer__end">
+      <ul class="footer__legal" aria-label="Site information">
+        <li><a class="footer__legal-link" href="/privacy/">Privacy</a></li>
+        <li><a class="footer__legal-link" href="/accessibility/">Accessibility</a></li>
+      </ul>
+      <p class="footer__copy">© {year} {SITE.name}</p>
+    </div>
   </div>
 </footer>
 
@@ -54,6 +60,14 @@ const [t1, t2] = SITE.tagline.split(/(?<=\.)\s+/);
     border-radius: var(--radius-md); color: var(--apricot); transition: color 300ms ease-in-out;
   }
   .footer__icon:hover { color: var(--ivory); }
+  .footer__end { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-1); }
+  .footer__legal { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-5); }
+  .footer__legal-link {
+    display: inline-flex; align-items: center; min-height: var(--target-min); color: var(--apricot);
+    font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.04em;
+    text-decoration: underline; text-underline-offset: 0.25em; border-radius: var(--radius-sm); transition: color 300ms ease-in-out;
+  }
+  .footer__legal-link:hover { color: var(--ivory); }
   .footer__copy { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.04em; }
   .footer a:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px var(--apricot); }
 
@@ -65,5 +79,6 @@ const [t1, t2] = SITE.tagline.split(/(?<=\.)\s+/);
     .footer__tagline { padding-left: 0; line-height: 1.3; }
     .footer__tagline span { display: block; }
     .footer__social { padding-left: 0; margin-left: -10px; }
+    .footer__end { align-items: flex-start; gap: 0; }
   }
 </style>

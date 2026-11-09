@@ -1,0 +1,31 @@
+---
+import TextPage from '../layouts/TextPage.astro';
+import { SITE } from '../data/site';
+---
+<TextPage title="Accessibility Statement" description="How veronicarivera.design is built to work for everyone, how it's tested, and how to report a problem."
+  eyebrow="Accessibility" heading="Accessibility Statement"
+  lead="I want everyone to be able to use this site, whether you browse with a keyboard, a screen reader, magnification, high contrast or a phone."
+  meta="Last reviewed November 8, 2026">
+  <h2>The standard</h2>
+  <p>This site aims to meet the <a href="https://www.w3.org/TR/WCAG22/">Web Content Accessibility Guidelines (WCAG) 2.2</a> at Level AA.</p>
+
+  <h2>What I built in</h2>
+  <ul>
+    <li>Text and controls meet at least 4.5:1 contrast in both the light and dark themes</li>
+    <li>Everything works with a keyboard, with a visible focus ring and a link to skip to the content</li>
+    <li>Images have text descriptions, and decorative ones are hidden from screen readers</li>
+    <li>Headings, landmarks and labels give each page a clear outline for screen readers</li>
+    <li>Slideshows can be paused, and motion stops when your device asks for reduced motion</li>
+    <li>Text resizes with your browser, and pages work from phone to desktop without sideways scrolling</li>
+    <li>Light, Dark and Auto themes, with Auto following your device setting</li>
+  </ul>
+
+  <h2>How I check it</h2>
+  <p>I test with automated checks (axe and Lighthouse), keyboard-only navigation, browser zoom, and contrast and color-blindness filters.</p>
+
+  <h2>Known limitations</h2>
+  <p>The case studies include screenshots of real projects. Small text inside those images isn't meant to be read as page text: the key points are in the text around them, in the image descriptions, and in links to the live sites.</p>
+
+  <h2>Feedback</h2>
+  <p>If something on this site is hard to use, email me at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the page and what happened. I'll reply within 2 business days.</p>
+</TextPage>
